@@ -1,7 +1,7 @@
 """
   Capstone Project.  Code to run on the EV3 robot (NOT on a laptop).
   Author:  Your professors (for the framework)
-    and PUT_YOUR_NAME_HERE.
+    and Matthew White.
   Winter term, 2018-2019.
 """
 
@@ -12,7 +12,7 @@ import time
 
 def main():
     """
-    This code, which must run on the EV3 ROBOT
+    This code, which must run on the EV3 ROBOT:
       1. Makes the EV3 robot to various things.
       2. Communicates via MQTT with the GUI code that runs on the LAPTOP.
     """
