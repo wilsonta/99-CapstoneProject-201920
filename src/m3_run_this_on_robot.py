@@ -8,7 +8,7 @@
 import rosebot
 import mqtt_remote_method_calls as com
 import time
-
+import shared_gui_delegate_on_robot
 
 def main():
     """
@@ -18,13 +18,24 @@ def main():
     """
 
     run_test_arm()
+    #real_thing()
 
 
+def real_thing():
+    robot = rosebot.RoseBot()
+    delegate = shared_gui_delegate_on_robot.Respond_to_GUI_message(robot)
+    mqtt_receiver = com.MqttClient(delegate)
+    mqtt_receiver.connect_to_pc()
+
+    while True:
+        time.sleep(.01)
 
 def run_test_arm():
     robot = rosebot.RoseBot()
     robot.arm_and_claw.calibrate_arm()
-    robot.arm_and_claw.move_arm_to_position(69)
+    time.sleep(0.01)
+    robot.arm_and_claw.move_arm_to_position(1)
+    time.sleep(0.01)
     robot.arm_and_claw.lower_arm()
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
