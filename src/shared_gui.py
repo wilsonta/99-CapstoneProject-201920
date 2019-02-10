@@ -315,8 +315,9 @@ def handle_exit(mqtt_sender):
 def handle_beep(beep_entry, mqtt_sender):
     beep = int(beep_entry.get())
     print('beeping', beep, 'times')
-    #mqtt_sender.send_message('beep', [beep])
+    mqtt_sender.send_message('beep', [beep])
 
 def handle_tone(tone_length_entry, tone_frequency_entry, mqtt_sender):
-
-    print('tone')
+    tone_length = int(tone_length_entry.get())
+    tone_frequency = int(tone_frequency_entry.get())
+    mqtt_sender.send_message('tone', [tone_length], [tone_frequency])
