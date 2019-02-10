@@ -22,6 +22,13 @@ class Respond_to_GUI_message(object):
         right = int(right_wheel_speed)
         self.robot.drive_system.go(left,right)
 
+    def move_arm_to_position(self,desired_pos):
+        self.robot.arm_and_claw.move_arm_to_position(int(desired_pos))
 
+    def raise_arm(self):
+        self.robot.arm_and_claw.raise_arm()
+
+    def calibrate_arm(self):
+        self.robot.arm_and_claw.calibrate_arm()
 
 
