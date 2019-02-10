@@ -146,6 +146,34 @@ def get_control_frame(window, mqtt_sender):
 
     return frame
 
+def get_sound_frame(window, mqtt_sender):
+    frame = ttk.Frame(window, padding=10, borderwidth=5, relief='ridge')
+    frame.grid()
+
+    frame_label = ttk.Label(frame, text='SoundSystem')
+    beep_button = ttk.Button(frame, text='how many times to beep')
+    tone_length_label = ttk.Label(frame, text='how long to tone')
+    tone_frequncy_label = ttk.Label(frame, text='what frequency')
+    beep_entry = ttk.Entry(frame, width=8)
+    tone_length_entry = ttk.Entry(frame, width=8)
+    tone_frequency_entry = ttk.Entry(frame, width=8)
+    tone_button = ttk.Button(frame, text='test tone')
+
+    frame_label.grid(row=0, column=1)
+    beep_button.grid(row=1, column=0)
+    tone_length_label.grid(row=1, column=1)
+    tone_frequncy_label.grid(row=1, column=2)
+    beep_entry.grid(row=2, column=0)
+    tone_length_entry.grid(row=2, column=1)
+    tone_frequency_entry.grid(row=2, column=2)
+    tone_button.grid(row=2, column=3)
+
+    beep_button['command'] = lambda: handle_beep(beep_entry, mqtt_sender)
+    tone_button['command'] = lambda: handle_tone(tone_length_entry, tone_frequency_entry, mqtt_sender)
+
+
+    return frame
+
 ###############################################################################
 ###############################################################################
 # The following specifies, for each Button,
@@ -280,3 +308,15 @@ def handle_exit(mqtt_sender):
     Then exit this program.
       :type mqtt_sender: com.MqttClient
     """
+
+#####################################################################
+# handlers for bottuns in the Sound Frame
+####################################################################
+def handle_beep(beep_entry, mqtt_sender):
+    beep = int(beep_entry.get())
+    print('beeping', beep, 'times')
+    #mqtt_sender.send_message('beep', [beep])
+
+def handle_tone(tone_length_entry, tone_frequency_entry, mqtt_sender):
+
+    print('tone')
