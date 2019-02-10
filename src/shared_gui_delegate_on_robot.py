@@ -22,6 +22,3 @@ class Respond_to_GUI_message(object):
         right = int(right_wheel_speed)
         self.robot.drive_system.go(left,right)
 
-
-
-
