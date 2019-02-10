@@ -190,8 +190,8 @@ def handle_left(left_entry_box, right_entry_box, mqtt_sender):
       :type  mqtt_sender:      com.MqttClient
     """
     print('left',left_entry_box.get(),right_entry_box.get())
-    left = -int(left_entry_box.get())
-    right = int(right_entry_box.get())
+    left = int(left_entry_box.get())
+    right = -int(right_entry_box.get())
     mqtt_sender.send_message('go',[str(left),str(right)])
 
 def handle_right(left_entry_box, right_entry_box, mqtt_sender):
@@ -203,8 +203,8 @@ def handle_right(left_entry_box, right_entry_box, mqtt_sender):
       :type  mqtt_sender:      com.MqttClient
     """
     print('right',left_entry_box.get(),right_entry_box.get())
-    left = int(left_entry_box.get())
-    right = -int(right_entry_box.get())
+    left = -int(left_entry_box.get())
+    right = int(right_entry_box.get())
     mqtt_sender.send_message('go',[str(left),str(right)])
 
 
@@ -239,7 +239,7 @@ def handle_lower_arm(mqtt_sender):
     """
     print('Arm Lowering')
 
-    mqtt_sender.send_message('lower_arm'[0])
+    mqtt_sender.send_message('lower_arm')
 
 
 def handle_calibrate_arm(mqtt_sender):
