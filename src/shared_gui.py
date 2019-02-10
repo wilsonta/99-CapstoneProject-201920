@@ -239,7 +239,7 @@ def handle_lower_arm(mqtt_sender):
     """
     print('Arm Lowering')
 
-    mqtt_sender.send_message('move_arm_to_position'[0])
+    mqtt_sender.send_message('lower_arm'[0])
 
 
 def handle_calibrate_arm(mqtt_sender):
