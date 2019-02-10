@@ -32,11 +32,14 @@ def real_thing():
 
 def run_test_arm():
     robot = rosebot.RoseBot()
-    robot.arm_and_claw.calibrate_arm()
-    time.sleep(0.01)
-    robot.arm_and_claw.move_arm_to_position(1)
-    time.sleep(0.01)
-    robot.arm_and_claw.lower_arm()
+    #robot.arm_and_claw.calibrate_arm()
+    #time.sleep(0.01)
+    #robot.arm_and_claw.move_arm_to_position(1)
+    #time.sleep(0.01)
+    #robot.arm_and_claw.lower_arm()
+    robot.drive_system.go(70, 70)
+    #time.sleep(.01)
+
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
 # -----------------------------------------------------------------------------
