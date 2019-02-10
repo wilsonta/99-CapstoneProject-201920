@@ -31,4 +31,8 @@ class Respond_to_GUI_message(object):
     def calibrate_arm(self):
         self.robot.arm_and_claw.calibrate_arm()
 
+    def lower_arm(self):
+        self.robot.arm_and_claw.lower_arm()
+
+
 
