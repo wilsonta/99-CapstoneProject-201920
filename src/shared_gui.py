@@ -213,9 +213,9 @@ def handle_stop(mqtt_sender):
     Tells the robot to stop.
       :type  mqtt_sender:  com.MqttClient
     """
-    print('stop')
     left = 0
     right = 0
+    print('stop',left,right)
     mqtt_sender.send_message('go',[left,right])
 
 
@@ -227,6 +227,7 @@ def handle_raise_arm(mqtt_sender):
     Tells the robot to raise its Arm until its touch sensor is pressed.
       :type  mqtt_sender:  com.MqttClient
     """
+    print('Arm Raising')
 
 
 def handle_lower_arm(mqtt_sender):
