@@ -35,17 +35,26 @@ def get_teleoperation_frame(window, mqtt_sender):
     frame_label = ttk.Label(frame, text="Teleoperation")
     left_speed_label = ttk.Label(frame, text="Left wheel speed (0 to 100)")
     right_speed_label = ttk.Label(frame, text="Right wheel speed (0 to 100)")
+    inches_label = ttk.Label(frame, text="Number of inches to travel")
+    time_label = ttk.Label(frame, text = "Number of seconds")
 
     left_speed_entry = ttk.Entry(frame, width=8)
     left_speed_entry.insert(0, "100")
     right_speed_entry = ttk.Entry(frame, width=8, justify=tkinter.RIGHT)
     right_speed_entry.insert(0, "100")
+    inches_entry = ttk.Entry(frame, width = 8)
+    inches_entry.insert(0, "0")
+    time_entry = ttk.Entry(frame, width = 8)
+    time_entry.insert(0,"0")
 
     forward_button = ttk.Button(frame, text="Forward")
     backward_button = ttk.Button(frame, text="Backward")
     left_button = ttk.Button(frame, text="Left")
     right_button = ttk.Button(frame, text="Right")
     stop_button = ttk.Button(frame, text="Stop")
+    go_straight_seconds_button = ttk.Button(frame, text="Straight for Seconds")
+    go_straight_for_inches_using_time_button = ttk.Button(frame, text="Straight for # of inches (time)")
+    go_straight_for_inches_using_encoder_button = ttk.Button(frame, text="Straight for # of inches (encoders)")
 
     # Grid the widgets:
     frame_label.grid(row=0, column=1)
@@ -53,12 +62,21 @@ def get_teleoperation_frame(window, mqtt_sender):
     right_speed_label.grid(row=1, column=2)
     left_speed_entry.grid(row=2, column=0)
     right_speed_entry.grid(row=2, column=2)
+    inches_label.grid(row=6 ,column=0)
+    time_label.grid(row=6 ,column=1)
+    time_entry.grid(row = 7, column=1)
+    inches_entry.grid(row = 7,column = 0)
+
+
 
     forward_button.grid(row=3, column=1)
     left_button.grid(row=4, column=0)
     stop_button.grid(row=4, column=1)
     right_button.grid(row=4, column=2)
     backward_button.grid(row=5, column=1)
+    go_straight_seconds_button.grid(row = 8,column = 0)
+    go_straight_for_inches_using_time_button.grid(row = 8, column = 1)
+    go_straight_for_inches_using_encoder_button.grid(row = 8, column = 2)
 
     # Set the button callbacks:
     forward_button["command"] = lambda: handle_forward(
@@ -70,6 +88,17 @@ def get_teleoperation_frame(window, mqtt_sender):
     right_button["command"] = lambda: handle_right(
         left_speed_entry, right_speed_entry, mqtt_sender)
     stop_button["command"] = lambda: handle_stop(mqtt_sender)
+
+    go_straight_seconds_button["command"] = lambda: handle_go_straight_for_seconds(mqtt_sender,
+                                                                                   time_entry,right_speed_entry)
+    go_straight_for_inches_using_time_button["command"] = lambda: handle_go_straight_for_inches_using_time(mqtt_sender,
+                                                                                                           inches_entry,right_speed_entry)
+    go_straight_for_inches_using_encoder_button["command"] = lambda: handle_go_straight_for_inches_using_encoder(mqtt_sender,
+                                                                                                                 inches_entry,right_speed_entry)
+
+
+
+
 
     return frame
 
@@ -312,11 +341,34 @@ def handle_exit(mqtt_sender):
 #####################################################################
 # handlers for bottuns in the Sound Frame
 ####################################################################
-def handle_beep(beep_entry, mqtt_sender):
-    beep = int(beep_entry.get())
-    mqtt_sender.send_message('beep', [beep])
+def go_straight_for_inches_using_time(self,inches,speed):
+    self.robot.drive_system.go_straight_for_inches_using_time(inches, speed)
 
-def handle_tone(tone_length_entry, tone_frequency_entry, mqtt_sender):
-    tone_length = int(tone_length_entry.get())
-    tone_frequency = int(tone_frequency_entry.get())
-    mqtt_sender.send_message('tone', [tone_length, tone_frequency])
+
+
+# def handle_tone(tone_length_entry, tone_frequency_entry, mqtt_sender):
+#     print('I am about to play a tone with a freq of: ',tone_frequency,'for :',tone_length_entry,' sec')
+#     tone_length = int(tone_length_entry.get())
+#     tone_frequency = int(tone_frequency_entry.get())
+#     mqtt_sender.send_message('tone', [tone_length, tone_frequency])
+
+def handle_go_straight_for_seconds(mqtt_sender, seconds, speed):
+    print('I will go straight for :', seconds,' sec, at a spped of: ', speed)
+    seconds = int(seconds)
+    speed = int(speed)
+    mqtt_sender.send_message('go_straight_for_seconds',[seconds, speed])
+
+def handle_go_straight_for_inches_using_time(mqtt_sender,inches,speed):
+    print('I am going straight for', inches,' in at a speed of: ', speed)
+    inches = int(inches)
+    speed = int(speed)
+
+    mqtt_sender.send_message('go_straight_for_inches_using_time',[inches,speed])
+
+
+def handle_go_straight_for_inches_using_encoder(mqtt_sender, inches, speed):
+    print('I am going straight for', inches, ' in at a speed of: ', speed)
+    inches = int(inches)
+    speed = int(speed)
+
+    mqtt_sender.send_message('go_straight_for_inches_using_encoder', [inches, speed])
