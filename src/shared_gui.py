@@ -187,6 +187,8 @@ def get_sound_frame(window, mqtt_sender):
     tone_length_entry = ttk.Entry(frame, width=8)
     tone_frequency_entry = ttk.Entry(frame, width=8)
     tone_button = ttk.Button(frame, text='test tone')
+    speak_button = ttk.Button(frame, text='phrase to speak')
+    speak_entry = ttk.Entry(frame, width=20)
 
     frame_label.grid(row=0, column=1)
     beep_button.grid(row=1, column=0)
@@ -196,10 +198,12 @@ def get_sound_frame(window, mqtt_sender):
     tone_length_entry.grid(row=2, column=1)
     tone_frequency_entry.grid(row=2, column=2)
     tone_button.grid(row=2, column=3)
+    speak_button.grid(row=1, column=5)
+    speak_entry.grid(row=2, column=5)
 
     beep_button['command'] = lambda: handle_beep(beep_entry, mqtt_sender)
     tone_button['command'] = lambda: handle_tone(tone_length_entry, tone_frequency_entry, mqtt_sender)
-
+    speak_button['command'] = lambda: handle_speak(speak_entry, mqtt_sender)
 
     return frame
 
@@ -354,6 +358,11 @@ def handle_tone(tone_length_entry, tone_frequency_entry, mqtt_sender):
      tone_frequency = int(tone_frequency_entry.get())
      print('I am about to play a tone with a freq of ', tone_frequency, 'for ', tone_length, ' seconds')
      mqtt_sender.send_message('tone', [tone_length, tone_frequency])
+
+def handle_speak(speak_entry, mqtt_sender):
+    speak = speak_entry.get()
+    print(speak)
+    mqtt_sender.send_message('speak', [speak])
 
 def handle_go_straight_for_seconds(mqtt_sender, right_speed_entry,time_entry):
     print('I will go straight for :', time_entry.get(),' sec, at a spped of: ', time_entry.get())
