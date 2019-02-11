@@ -347,7 +347,7 @@ def go_straight_for_inches_using_time(self,inches,speed):
 def handle_beep(beep_entry, mqtt_sender):
     beep = int(beep_entry.get())
     print('beeping', beep, 'times')
-    mqtt_sender.send_message('tone', [beep])
+    mqtt_sender.send_message('beep', [beep])
 
 def handle_tone(tone_length_entry, tone_frequency_entry, mqtt_sender):
      tone_length = int(tone_length_entry.get())
