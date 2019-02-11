@@ -351,9 +351,7 @@ def handle_beep(beep_entry, mqtt_sender):
 
 def handle_tone(tone_length_entry, tone_frequency_entry, mqtt_sender):
      tone_length = int(tone_length_entry.get())
-     print(tone_length)
      tone_frequency = int(tone_frequency_entry.get())
-     print(tone_frequency)
      print('I am about to play a tone with a freq of ', tone_frequency, 'for ', tone_length, ' seconds')
      mqtt_sender.send_message('tone', [tone_length, tone_frequency])
 
