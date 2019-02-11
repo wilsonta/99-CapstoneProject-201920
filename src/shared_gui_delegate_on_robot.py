@@ -17,6 +17,8 @@ class Respond_to_GUI_message(object):
 
         self.robot = robot
 
+        self.stop_program = True
+
     def go(self, left_wheel_speed, right_wheel_speed):
         left = int(left_wheel_speed)
         right = int(right_wheel_speed)
@@ -49,6 +51,6 @@ class Respond_to_GUI_message(object):
     def go_straight_for_inches_using_encoder(self,inches,speed):
         self.robot.drive_system.go_straight_for_inches_using_encoder(inches, speed)
 
-
-
+    def quit(self):
+        self.stop_program = True
 
