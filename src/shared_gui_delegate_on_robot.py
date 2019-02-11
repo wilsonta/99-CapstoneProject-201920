@@ -36,11 +36,11 @@ class Respond_to_GUI_message(object):
     def lower_arm(self):
         self.robot.arm_and_claw.lower_arm()
 
-    # def beep(self,number_of_beep_s):
-    #     self.robot.sound_system.number_of_beeps(number_of_beep_s)
-    #
-    # def tone(self, tone_length, tone_frequency):
-    #     self.robot.sound_system.new_tone(tone_length,tone_frequency)
+    def beep(self,number_of_beep_s):
+        self.robot.sound_system.number_of_beeps(number_of_beep_s)
+
+    def tone(self, tone_length, tone_frequency):
+        self.robot.sound_system.new_tone(tone_length,tone_frequency)
 
     def go_straight_for_seconds(self, seconds, speed):
         self.robot.drive_system.go_straight_for_seconds(seconds, speed)
