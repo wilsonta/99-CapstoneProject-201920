@@ -38,7 +38,7 @@ class Respond_to_GUI_message(object):
 
     def beep(self,number_of_beep_s):
         for _ in range(number_of_beep_s):
-            self.robot.sound_system.beeper.beep()
+            self.robot.sound_system.beeper.beep().wait()
 
     def tone(self, tone_length, tone_frequency):
         self.robot.sound_system.tone_maker.play_tone(tone_frequency,tone_length)

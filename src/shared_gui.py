@@ -355,23 +355,23 @@ def handle_tone(tone_length_entry, tone_frequency_entry, mqtt_sender):
      print('I am about to play a tone with a freq of ', tone_frequency, 'for ', tone_length, ' seconds')
      mqtt_sender.send_message('tone', [tone_length, tone_frequency])
 
-def handle_go_straight_for_seconds(mqtt_sender, seconds, speed):
-    print('I will go straight for :', seconds,' sec, at a spped of: ', speed)
-    seconds = int(seconds)
-    speed = int(speed)
+def handle_go_straight_for_seconds(mqtt_sender, right_speed_entry,time_entry):
+    print('I will go straight for :', time_entry.get(),' sec, at a spped of: ', time_entry.get())
+    seconds = int(time_entry.get())
+    speed = int(right_speed_entry.get())
     mqtt_sender.send_message('go_straight_for_seconds',[seconds, speed])
 
-def handle_go_straight_for_inches_using_time(mqtt_sender,inches,speed):
-    print('I am going straight for', inches,' in at a speed of: ', speed)
-    inches = int(inches)
-    speed = int(speed)
+def handle_go_straight_for_inches_using_time(mqtt_sender,inches_entry,right_speed_entry):
+    print('I am going straight for', inches_entry.get(),' in at a speed of: ', right_speed_entry.get())
+    inches = int(inches_entry.get())
+    speed = int(right_speed_entry.get())
 
     mqtt_sender.send_message('go_straight_for_inches_using_time',[inches,speed])
 
 
-def handle_go_straight_for_inches_using_encoder(mqtt_sender, inches, speed):
-    print('I am going straight for', inches, ' in at a speed of: ', speed)
-    inches = int(inches)
-    speed = int(speed)
+def handle_go_straight_for_inches_using_encoder(mqtt_sender, inches_entry, right_speed_entry):
+    print('I am going straight for', inches_entry.get(), ' in at a speed of: ', right_speed_entry.get())
+    inches = int(inches_entry.get())
+    speed = int(right_speed_entry.get())
 
     mqtt_sender.send_message('go_straight_for_inches_using_encoder', [inches, speed])
