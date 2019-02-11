@@ -17,7 +17,7 @@ class Respond_to_GUI_message(object):
 
         self.robot = robot
 
-        self.stop_program = False
+        self.stop_program = True
 
     def go(self, left_wheel_speed, right_wheel_speed):
         left = int(left_wheel_speed)
@@ -37,10 +37,10 @@ class Respond_to_GUI_message(object):
         self.robot.arm_and_claw.lower_arm()
 
     def beep(self,number_of_beep_s):
-         self.robot.sound_system.number_of_beeps(number_of_beep_s)
+        self.robot.sound_system.number_of_beeps(number_of_beep_s)
 
     def tone(self, tone_length, tone_frequency):
-         self.robot.sound_system.new_tone(tone_length,tone_frequency)
+        self.robot.sound_system.new_tone(tone_length,tone_frequency)
 
     def go_straight_for_seconds(self, seconds, speed):
         self.robot.drive_system.go_straight_for_seconds(seconds, speed)
@@ -53,5 +53,4 @@ class Respond_to_GUI_message(object):
 
     def quit(self):
         self.stop_program = True
-        #Still need button
 
