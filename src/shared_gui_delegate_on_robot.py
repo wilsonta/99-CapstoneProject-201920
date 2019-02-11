@@ -17,7 +17,7 @@ class Respond_to_GUI_message(object):
 
         self.robot = robot
 
-        self.stop_program = True
+        self.stop_program = False
 
     def go(self, left_wheel_speed, right_wheel_speed):
         left = int(left_wheel_speed)
