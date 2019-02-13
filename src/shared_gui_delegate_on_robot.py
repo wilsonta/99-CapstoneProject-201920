@@ -61,3 +61,6 @@ class Respond_to_GUI_message(object):
     def quit(self):
         self.stop_program = True
 
+    def go_until_color_is(self,color, speed):
+        self.robot.drive_system.go_straight_until_color_is(color,speed)
+
