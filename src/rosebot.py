@@ -228,11 +228,13 @@ class DriveSystem(object):
    # -------------------------------------------------------------------------
     # Methods for driving that use the camera.
     # -------------------------------------------------------------------------
+
     def display_camera_data(self):
         """
         #Displays on the GUI the Blob data of the Blob that the camera sees
         #if any).
-
+    def display_camera_data(self):
+        print(self.sensor_system.camera.get_biggest_blob())
 
     def spin_clockwise_until_sees_object(self, speed, area):
         """
@@ -346,7 +348,6 @@ class SensorSystem(object):
         # self.ir_beacon_sensor = InfraredBeaconSensor(4)
         # self.beacon_system =
         # self.display_system =
-
 
 
 ###############################################################################
