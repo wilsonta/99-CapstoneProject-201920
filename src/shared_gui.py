@@ -38,6 +38,7 @@ def get_teleoperation_frame(window, mqtt_sender):
     right_speed_label = ttk.Label(frame, text="Right wheel speed (0 to 100)")
     inches_label = ttk.Label(frame, text="Number of inches to travel")
     time_label = ttk.Label(frame, text = "Number of seconds")
+    color_sensor =ttk.Label(frame, text='Go to Color')
 
     left_speed_entry = ttk.Entry(frame, width=8)
     left_speed_entry.insert(0, "100")
@@ -47,6 +48,7 @@ def get_teleoperation_frame(window, mqtt_sender):
     inches_entry.insert(0, "0")
     time_entry = ttk.Entry(frame, width = 8)
     time_entry.insert(0,"0")
+    color_entry = ttk.Entry(frame, width=8)
 
     forward_button = ttk.Button(frame, text="Forward")
     backward_button = ttk.Button(frame, text="Backward")
@@ -57,6 +59,7 @@ def get_teleoperation_frame(window, mqtt_sender):
     go_straight_for_inches_using_time_button = ttk.Button(frame, text="Straight for # of inches (time)")
     go_straight_for_inches_using_encoder_button = ttk.Button(frame, text="Straight for # of inches (encoders)")
     camera_data_button = ttk.Button(frame, text='camera data')
+    go_until_color_is_button = ttk.Button(frame, text='Go to Color')
 
     # Grid the widgets:
     frame_label.grid(row=0, column=1)
@@ -69,7 +72,8 @@ def get_teleoperation_frame(window, mqtt_sender):
     time_entry.grid(row = 7, column=1)
     inches_entry.grid(row = 7,column = 0)
     camera_data_button.grid(row=9, column=0)
-
+    color_sensor.grid(row=10, column=0)
+    color_entry.grid(row=11, column=0)
 
 
     forward_button.grid(row=3, column=1)
@@ -80,7 +84,7 @@ def get_teleoperation_frame(window, mqtt_sender):
     go_straight_seconds_button.grid(row = 8,column = 0)
     go_straight_for_inches_using_time_button.grid(row = 8, column = 1)
     go_straight_for_inches_using_encoder_button.grid(row = 8, column = 2)
-
+    go_until_color_is_button.grid(row=12, column=0)
     # Set the button callbacks:
     forward_button["command"] = lambda: handle_forward(
         left_speed_entry, right_speed_entry, mqtt_sender)
@@ -99,6 +103,7 @@ def get_teleoperation_frame(window, mqtt_sender):
     go_straight_for_inches_using_encoder_button["command"] = lambda: handle_go_straight_for_inches_using_encoder(mqtt_sender,
                                                                                                                  inches_entry,right_speed_entry)
     camera_data_button['command'] = lambda: handle_camera_data()
+    go_until_color_is_button['command'] =lambda: handle_go_until_color_is(mqtt_sender)
 
 
 
@@ -391,3 +396,8 @@ def handle_go_straight_for_inches_using_encoder(mqtt_sender, inches_entry, right
     speed = int(right_speed_entry.get())
 
     mqtt_sender.send_message('go_straight_for_inches_using_encoder', [inches, speed])
+
+def handle_go_until_color_is(mqtt_sender, color_entry, right_speed_entry):
+    print('I am going until', color_entry.get(), 'in a speed of:', right_speed_entry.get())
+
+    mqtt_sender.send_message('go_until_color_is', [color_entry.get(), right_speed_entry.get()])
