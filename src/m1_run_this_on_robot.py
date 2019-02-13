@@ -40,7 +40,7 @@ def run_test_drive_system():
     #time.sleep(5)
     #robot.drive_system.go_straight_for_inches_using_time(7, 70)
     #robot.drive_system.go_straight_for_inches_using_encoder(8, -70)
-    robot.drive_system.go_straight_until_color_is('Blue',100)
+    #robot.drive_system.go_straight_until_color_is('Blue',100)
     robot.drive_system.go_straight_until_color_is_not('Blue',100)
 
 # -----------------------------------------------------------------------------
