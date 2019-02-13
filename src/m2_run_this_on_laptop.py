@@ -1,45 +1,81 @@
-"""
-  Capstone Project.  Code to run on the EV3 robot (NOT on a laptop).
-  Author:  Your professors (for the framework)
-    and Matthew White.
+""""
+  Capstone Project.  Code to run on a LAPTOP (NOT the robot).
+  Displays the Graphical User Interface (GUI) and communicates with the robot.
+
+  Authors:  Your professors (for the framework)
+    and Greg Wenning.
   Winter term, 2018-2019.
 """
 
-import rosebot
 import mqtt_remote_method_calls as com
-import time
-import shared_gui_delegate_on_robot
+import tkinter
+from tkinter import ttk
+import shared_gui
+
 
 def main():
     """
-    This code, which must run on the EV3 ROBOT:
-      1. Makes the EV3 robot to various things.
-      2. Communicates via MQTT with the GUI code that runs on the LAPTOP.
+    This code, which must run on a LAPTOP:
+      1. Constructs a GUI for my part of the Capstone Project.
+      2. Communicates via MQTT with the code that runs on the EV3 robot.
     """
-    run_test_drive_system()
-    #run_test_arm()
-    #real_thing()
+    # -------------------------------------------------------------------------
+    # Construct and connect the MQTT Client:
+    # -------------------------------------------------------------------------
+    mqtt_sender = com.MqttClient()
+    mqtt_sender.connect_to_ev3()
+
+    # -------------------------------------------------------------------------
+    # The root TK object for the GUI:
+    # -------------------------------------------------------------------------
+    root = tkinter.Tk()
+    root.title('CSSE 120 Capstone Project, Greg Wenning')
 
 
-def real_thing():
-    robot = rosebot.RoseBot()
-    delegate = shared_gui_delegate_on_robot.Respond_to_GUI_message(robot)
-    mqtt_receiver = com.MqttClient(delegate)
-    mqtt_receiver.connect_to_pc()
+    # -------------------------------------------------------------------------
+    # The main frame, upon which the other frames are placed.
+    # -------------------------------------------------------------------------
+    main_frame = ttk.Frame(root, padding=10, borderwidth=5, relief='groove')
+    main_frame.grid()
 
-    while True:
-        time.sleep(.01)
+    # -------------------------------------------------------------------------
+    # Sub-frames for the shared GUI that the team developed:
+    # -------------------------------------------------------------------------
+    teleop_frame, arm_frame, control_frame, sound_frame = get_shared_frames(main_frame, mqtt_sender)
 
-def run_test_arm():
-    robot = rosebot.RoseBot()
-    robot.arm_and_claw.calibrate_arm()
+    # -------------------------------------------------------------------------
+    # Frames that are particular to my individual contributions to the project.
+    # -------------------------------------------------------------------------
+    # TODO: Implement and call get_my_frames(...)
 
-def run_test_drive_system():
-    robot = rosebot.RoseBot()
-    #robot.drive_system.go_straight_for_seconds(5, 70)
-    #time.sleep(5)
-    #robot.drive_system.go_straight_for_inches_using_time(7, 70)
-    robot.drive_system.go_straight_for_inches_using_encoder(8, -70)
+    # -------------------------------------------------------------------------
+    # Grid the frames.
+    # -------------------------------------------------------------------------
+    grid_frames(teleop_frame, arm_frame, control_frame, sound_frame)
+
+    # -------------------------------------------------------------------------
+    # The event loop:
+    # -------------------------------------------------------------------------
+    root.mainloop()
+
+
+def get_shared_frames(main_frame, mqtt_sender):
+    teleop_frame = shared_gui.get_teleoperation_frame(main_frame, mqtt_sender)
+    arm_frame= shared_gui.get_arm_frame(main_frame, mqtt_sender)
+    control_frame = shared_gui.get_control_frame(main_frame, mqtt_sender)
+    sound_frame = shared_gui.get_sound_frame(main_frame, mqtt_sender)
+
+
+    return teleop_frame, arm_frame, control_frame, sound_frame
+
+
+def grid_frames(teleop_frame, arm_frame, control_frame, sound_frame):
+    teleop_frame.grid(row=0, column=0)
+    arm_frame.grid(row=1, column=0)
+    control_frame.grid(row=2, column=0)
+    sound_frame.grid(row=3, column=0)
+
+
 
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
