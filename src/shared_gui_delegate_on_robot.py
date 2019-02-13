@@ -50,10 +50,11 @@ class Respond_to_GUI_message(object):
         self.robot.drive_system.display_camera_data()
 
     def go_straight_for_seconds(self, seconds, speed):
+        print('go_straight_for_seconds')
         self.robot.drive_system.go_straight_for_seconds(seconds, speed)
 
     def go_straight_for_inches_using_time(self,inches,speed):
-
+        print('o_straight_for_inches_using_time')
         self.robot.drive_system.go_straight_for_inches_using_time(inches, speed)
 
     def go_straight_for_inches_using_encoder(self,inches,speed):
