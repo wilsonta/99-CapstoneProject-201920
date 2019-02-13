@@ -102,7 +102,7 @@ def get_teleoperation_frame(window, mqtt_sender):
                                                                                                            inches_entry,right_speed_entry)
     go_straight_for_inches_using_encoder_button["command"] = lambda: handle_go_straight_for_inches_using_encoder(mqtt_sender,
                                                                                                                  inches_entry,right_speed_entry)
-    camera_data_button['command'] = lambda: handle_camera_data()
+    camera_data_button['command'] = lambda: handle_camera_data(mqtt_sender)
     go_until_color_is_button['command'] =lambda: handle_go_until_color_is(mqtt_sender)
 
 

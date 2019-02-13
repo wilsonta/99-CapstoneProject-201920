@@ -46,6 +46,9 @@ class Respond_to_GUI_message(object):
     def speak(self, phrase):
         self.robot.sound_system.speech_maker.speak(phrase).wait()
 
+    def m3_camera_data(self):
+        self.robot.drive_system.display_camera_data()
+
     def go_straight_for_seconds(self, seconds, speed):
         self.robot.drive_system.go_straight_for_seconds(seconds, speed)
 
