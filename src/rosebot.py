@@ -269,13 +269,24 @@ class DriveSystem(object):
         of the trained color whose area is at least the given area.
         Requires that the user train the camera on the color of the object.
         """
-
+        self.left_motor.turn_on(speed)
+        self.right_motor.turn_on(-speed)
+        while True:
+            if self.sensor_system.camera.get_biggest_blob() > area:
+                break
+        self.stop()
     def spin_counterclockwise_until_sees_object(self, speed, area):
         """
         Spins counter-clockwise at the given speed until the camera sees an object
         of the trained color whose area is at least the given area.
         Requires that the user train the camera on the color of the object.
         """
+        self.left_motor.turn_on(-speed)
+        self.right_motor.turn_on(speed)
+        while True:
+            if self.sensor_system.camera.get_biggest_blob() > area:
+                break
+        self.stop()
 
 
 
