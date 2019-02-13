@@ -262,6 +262,14 @@ def get_sound_frame(window, mqtt_sender):
 
     return frame
 
+def get_m3_frame(window, mqtt_sender):
+    frame = ttk.Frame(window, padding=10, borderwidth=5, relief='ridge')
+    frame.grid()
+
+    frame_label = ttk.Label(frame, text='m3 frame')
+    frame_label.grid(row=0, column=1)
+
+    return frame
 ###############################################################################
 ###############################################################################
 # The following specifies, for each Button,
