@@ -41,6 +41,10 @@ def get_teleoperation_frame(window, mqtt_sender):
     color_sensor_label =ttk.Label(frame, text='Go to Color')
     desired_distance_for_ir_sensor_label = ttk.Label(frame, text='Desired Distance')
     delta_for_ir_sensor_label = ttk.Label(frame, text='+/- for Smart Distance')
+    spin_clockwise_speed_label = ttk.Label(frame, text='spin clockwise speed')
+    spin_clockwise_area_label = ttk.Label(frame, text='area of object')
+    spin_counterclockwise_speed_label = ttk.Label(frame, text='spin counterclockwise speed')
+    spin_counterclockwise_area_label = ttk.Label(frame, text='spin counterclockwise area')
 
 
     left_speed_entry = ttk.Entry(frame, width=8)
@@ -54,6 +58,10 @@ def get_teleoperation_frame(window, mqtt_sender):
     color_entry = ttk.Entry(frame, width=8)
     desired_distance_for_ir_sensor_entry = ttk.Entry(frame, width=8)
     delta_for_ir_sensor_entry = ttk.Entry(frame, width=8)
+    spin_clockwise_entry_speed = ttk.Entry(frame, width=8)
+    spin_clockwise_entry_area = ttk.Entry(frame, width=8)
+    spin_counterclockwise_entry_speed = ttk.Entry(frame, width=8)
+    spin_counterclockwise_entry_area = ttk.Entry(frame, width=8)
 
     forward_button = ttk.Button(frame, text="Forward")
     backward_button = ttk.Button(frame, text="Backward")
@@ -68,6 +76,8 @@ def get_teleoperation_frame(window, mqtt_sender):
     desired_distance_for_ir_sensor_button_backwards = ttk.Button(frame, text = 'Move Backwards to Desired Distance')
     desired_distance_for_ir_sensor_button_forwards = ttk.Button(frame, text = 'Move Forwards to the Desired Distance')
     desired_distance_for_ir_sensor_button_smart = ttk.Button(frame, text = 'Smart Move to Distance')
+    spin_clockwise_until_object = ttk.Button(frame, text='Spin clockwise until object seen')
+    spin_counterclockwise_until_object = ttk.Button(frame, text='Spin counterclockwise until object seen')
 
 
     # Grid the widgets:
@@ -90,6 +100,16 @@ def get_teleoperation_frame(window, mqtt_sender):
     desired_distance_for_ir_sensor_button_backwards.grid(row=12,column=1)
     desired_distance_for_ir_sensor_button_forwards.grid(row=13,column=1)
     desired_distance_for_ir_sensor_button_smart.grid(row=14,column=1)
+    spin_clockwise_until_object.grid(row=15, column=1)
+    spin_clockwise_speed_label.grid(row=16, column=1)
+    spin_clockwise_area_label.grid(row=18, column=1)
+    spin_clockwise_entry_speed.grid(row=17, column=1)
+    spin_clockwise_entry_area.grid(row=19, column=1)
+    spin_counterclockwise_until_object.grid(row=15, column=2)
+    spin_counterclockwise_speed_label.grid(row=16, column=2)
+    spin_counterclockwise_area_label.grid(row=18, column=2)
+    spin_counterclockwise_entry_speed.grid(row=17, column=2)
+    spin_counterclockwise_entry_area.grid(row=19, column=2)
 
 
     forward_button.grid(row=3, column=1)
