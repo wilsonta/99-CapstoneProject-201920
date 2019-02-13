@@ -215,22 +215,22 @@ class DriveSystem(object):
         the robot should move until it is between 6.8 and 7.4 inches
         from the object.
         """
-
-    # -------------------------------------------------------------------------
-    # Methods for driving that use the infrared beacon sensor.
-    # -------------------------------------------------------------------------
-
         orig_distance = self.sensor_system.ir_proximity_sensor.get_distance_in_inches()
 
         if orig_distance + delta < inches & orig_distance - delta < inches:
-            self.go(speed,speed)
+            self.go(speed, speed)
 
         if orig_distance + delta > inches & orig_distance - delta < inches:
-            self.go(-int(speed),-int(speed))
+            self.go(-int(speed), -int(speed))
 
         while True:
             if self.sensor_system.ir_proximity_sensor.get_distance_in_inches() <= inches + delta & self.sensor_system.ir_proximity_sensor.get_distance_in_inches() >= delta + inches:
                 self.stop()
+    # -------------------------------------------------------------------------
+    # Methods for driving that use the infrared beacon sensor.
+    # -------------------------------------------------------------------------
+
+
 
 
 
@@ -616,8 +616,8 @@ class InfraredProximitySensor(object):
         in inches, where about 39.37 inches (which is 100 cm) means no object
         is within its field of vision.
         """
-        inches_per_cm = 2.54
-        return 48 * inches_per_cm * self.get_distance() / 100
+        cm_per_inch = 2.54
+        return (48 / cm_per_inch) * self.get_distance() / 100
 
 
 ###############################################################################

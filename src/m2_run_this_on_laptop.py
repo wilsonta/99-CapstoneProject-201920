@@ -1,4 +1,4 @@
-""""
+"""
   Capstone Project.  Code to run on a LAPTOP (NOT the robot).
   Displays the Graphical User Interface (GUI) and communicates with the robot.
 

@@ -38,7 +38,10 @@ def get_teleoperation_frame(window, mqtt_sender):
     right_speed_label = ttk.Label(frame, text="Right wheel speed (0 to 100)")
     inches_label = ttk.Label(frame, text="Number of inches to travel")
     time_label = ttk.Label(frame, text = "Number of seconds")
-    color_sensor =ttk.Label(frame, text='Go to Color')
+    color_sensor_label =ttk.Label(frame, text='Go to Color')
+    desired_distance_for_ir_sensor_label = ttk.Label(frame, text='Desired Distance')
+    delta_for_ir_sensor_label = ttk.Label(frame, text='+/- for Smart Distance')
+
 
     left_speed_entry = ttk.Entry(frame, width=8)
     left_speed_entry.insert(0, "100")
@@ -49,6 +52,8 @@ def get_teleoperation_frame(window, mqtt_sender):
     time_entry = ttk.Entry(frame, width = 8)
     time_entry.insert(0,"0")
     color_entry = ttk.Entry(frame, width=8)
+    desired_distance_for_ir_sensor_entry = ttk.Entry(frame, width=8)
+    delta_for_ir_sensor_entry = ttk.Entry(frame, width=8)
 
     forward_button = ttk.Button(frame, text="Forward")
     backward_button = ttk.Button(frame, text="Backward")
@@ -60,6 +65,10 @@ def get_teleoperation_frame(window, mqtt_sender):
     go_straight_for_inches_using_encoder_button = ttk.Button(frame, text="Straight for # of inches (encoders)")
     camera_data_button = ttk.Button(frame, text='camera data')
     go_until_color_is_button = ttk.Button(frame, text='Go to Color')
+    desired_distance_for_ir_sensor_button_backwards = ttk.Button(frame, text = 'Move Backwards to Desired Distance')
+    desired_distance_for_ir_sensor_button_forwards = ttk.Button(frame, text = 'Move Forwards to the Desired Distance')
+    desired_distance_for_ir_sensor_button_smart = ttk.Button(frame, text = 'Smart Move to Distance')
+
 
     # Grid the widgets:
     frame_label.grid(row=0, column=1)
@@ -72,8 +81,15 @@ def get_teleoperation_frame(window, mqtt_sender):
     time_entry.grid(row = 7, column=1)
     inches_entry.grid(row = 7,column = 0)
     camera_data_button.grid(row=9, column=0)
-    color_sensor.grid(row=10, column=0)
+    color_sensor_label.grid(row=10, column=0)
     color_entry.grid(row=11, column=0)
+    desired_distance_for_ir_sensor_label.grid(row=10, column=1)
+    delta_for_ir_sensor_label.grid(row=10, column=2)
+    desired_distance_for_ir_sensor_entry.grid(row=11,column=1)
+    delta_for_ir_sensor_entry.grid(row=11,column=2)
+    desired_distance_for_ir_sensor_button_backwards.grid(row=12,column=1)
+    desired_distance_for_ir_sensor_button_forwards.grid(row=13,column=1)
+    desired_distance_for_ir_sensor_button_smart.grid(row=14,column=1)
 
 
     forward_button.grid(row=3, column=1)
@@ -85,6 +101,8 @@ def get_teleoperation_frame(window, mqtt_sender):
     go_straight_for_inches_using_time_button.grid(row = 8, column = 1)
     go_straight_for_inches_using_encoder_button.grid(row = 8, column = 2)
     go_until_color_is_button.grid(row=12, column=0)
+
+
     # Set the button callbacks:
     forward_button["command"] = lambda: handle_forward(
         left_speed_entry, right_speed_entry, mqtt_sender)
@@ -104,6 +122,10 @@ def get_teleoperation_frame(window, mqtt_sender):
                                                                                                                  inches_entry,right_speed_entry)
     camera_data_button['command'] = lambda: handle_camera_data(mqtt_sender)
     go_until_color_is_button['command'] =lambda: handle_go_until_color_is(mqtt_sender)
+
+    desired_distance_for_ir_sensor_button_smart['command'] = lambda: handle_smart_to_distance(mqtt_sender,delta_for_ir_sensor_entry,desired_distance_for_ir_sensor_entry,right_speed_entry)
+    desired_distance_for_ir_sensor_button_forwards['command'] = lambda: handle_forwards_to_distance(mqtt_sender,desired_distance_for_ir_sensor_entry,right_speed_entry)
+    desired_distance_for_ir_sensor_button_backwards['command'] = lambda: handle_backwards_to_distance(mqtt_sender,desired_distance_for_ir_sensor_entry,right_speed_entry)
 
 
 
@@ -290,6 +312,14 @@ def handle_stop(mqtt_sender):
 def handle_camera_data(mqtt_sender):
     mqtt_sender.send_message('m3_camera_data')
 
+def handle_backwards_to_distance(mqtt_sender, desired_distance_for_ir_sensor_entry, right_entry_box):
+    mqtt_sender.send_message('',[desired_distance_for_ir_sensor_entry.get(),right_entry_box.get()])
+
+def handle_forwards_to_distance(mqtt_sender, desired_distance_for_ir_sensor_entry, right_entry_box):
+    mqtt_sender.send_message('',[desired_distance_for_ir_sensor_entry.get(),right_entry_box.get()])
+
+def handle_smart_to_distance(mqtt_sender, delta_for_ir_sensor_entry, desired_distance_for_ir_sensor_entry, right_entry_box):
+    mqtt_sender.send_message('',[delta_for_ir_sensor_entry.get(), desired_distance_for_ir_sensor_entry.get(),right_entry_box.get()])
 
 
 ###############################################################################
