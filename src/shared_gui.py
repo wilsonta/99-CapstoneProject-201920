@@ -276,7 +276,7 @@ def get_m2_frame(window, mqtt_sender):
     frame.grid()
 
     frame_label = ttk.Label(frame, text='not for Tim or Greg')
-    frame_label.grid(row=1,column=1)
+    frame_label.grid(row=2,column=1)
 
     tone_freq_label = ttk.Label(frame, text = 'input initial frequency')
     tone_freq_label.grid(row=0,column=0)
