@@ -29,7 +29,7 @@ def main():
     # The root TK object for the GUI:
     # -------------------------------------------------------------------------
     root = tkinter.Tk()
-    root.title('CSSE 120 Capstone Project, Greg Wenning')
+    root.title('CSSE 120 Capstone Project')
 
 
     # -------------------------------------------------------------------------
