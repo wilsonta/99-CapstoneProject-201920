@@ -3,7 +3,7 @@
   Displays the Graphical User Interface (GUI) and communicates with the robot.
 
   Authors:  Your professors (for the framework)
-    and TIm Wilson.
+    and Tim Wilson.
   Winter term, 2018-2019.
 """
 
@@ -38,6 +38,7 @@ def main():
     main_frame = ttk.Frame(root, padding=10, borderwidth=5, relief='groove')
     main_frame.grid()
 
+
     # -------------------------------------------------------------------------
     # Sub-frames for the shared GUI that the team developed:
     # -------------------------------------------------------------------------
@@ -48,10 +49,11 @@ def main():
     # -------------------------------------------------------------------------
     # TODO: Implement and call get_my_frames(...)
 
+
     # -------------------------------------------------------------------------
     # Grid the frames.
     # -------------------------------------------------------------------------
-    grid_frames(teleop_frame, arm_frame, control_frame, sound_frame)
+    grid_frames(teleop_frame, arm_frame, control_frame, sound_frame,m1_frame)
 
     # -------------------------------------------------------------------------
     # The event loop:
@@ -69,11 +71,27 @@ def get_shared_frames(main_frame, mqtt_sender):
     return teleop_frame, arm_frame, control_frame, sound_frame
 
 
-def grid_frames(teleop_frame, arm_frame, control_frame, sound_frame):
+def grid_frames(teleop_frame, arm_frame, control_frame, sound_frame, m1_frame):
     teleop_frame.grid(row=0, column=0)
     arm_frame.grid(row=1, column=0)
     control_frame.grid(row=2, column=0)
     sound_frame.grid(row=3, column=0)
+    m1_frame.grid(row=4,column=0)
+
+def m1_frame(window,mqtt_sender):
+    frame = ttk.Frame(window, padding=10, borderwidth=5, relief='ridge')
+    frame.grid()
+
+    frame_label = ttk.Label(frame, text='m1 Stuff')
+    beep_sensor_button = ttk.Button(frame, text='Beep Sensor')
+    beep_sensor_entry = ttk.Entry(frame, width=8)
+
+
+    frame_label.grid(row=0, column=1)
+    beep_sensor_button.grid(row=1, column=0)
+    beep_sensor_entry.grid(row=2, column=0)
+
+    return frame
 
 
 

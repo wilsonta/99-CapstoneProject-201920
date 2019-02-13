@@ -43,6 +43,25 @@ def run_test_drive_system():
     #robot.drive_system.go_straight_until_color_is('Blue',100)
     robot.drive_system.go_straight_until_color_is_not('Blue',100)
 
+def beep_as_it_runs():
+    timer=3
+    robot=rosebot.RoseBot()
+    distance=robot.sensor_system.ir_proximity_sensor.get_distance()
+    robot.drive_system.go()
+    start_time=time.time()
+    while True:
+        robot.sound_system.beeper.beep()
+        time.sleep(timer)
+        if robot.sensor_system.ir_proximity_sensor.get_distance()>distance:
+            timer=timer+.2
+            distance=robot.sensor_system.ir_proximity_sensor.get_distance()
+        elif robot.sensor_system.ir_proximity_sensor.get_distance()<distance:
+            timer = timer - .2
+            distance = robot.sensor_system.ir_proximity_sensor.get_distance()
+        if time.time()==start_time+5:
+            robot.drive_system.stop()
+            break
+
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
 # -----------------------------------------------------------------------------
