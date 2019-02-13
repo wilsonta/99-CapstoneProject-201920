@@ -121,6 +121,7 @@ class DriveSystem(object):
         self.left_motor.reset_position()
         self.go(speed, speed)
         while True:
+            print(self.left_motor.get_position())
             if abs(self.left_motor.get_position()) >= degrees:
                 self.stop()
                 break

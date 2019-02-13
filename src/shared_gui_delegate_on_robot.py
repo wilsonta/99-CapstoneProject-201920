@@ -42,6 +42,7 @@ class Respond_to_GUI_message(object):
 
     def tone(self, tone_length, tone_frequency):
         self.robot.sound_system.tone_maker.play_tone(tone_frequency,tone_length)
+
     def speak(self, phrase):
         self.robot.sound_system.speech_maker.speak(phrase).wait()
 
@@ -49,10 +50,13 @@ class Respond_to_GUI_message(object):
         self.robot.drive_system.go_straight_for_seconds(seconds, speed)
 
     def go_straight_for_inches_using_time(self,inches,speed):
+
         self.robot.drive_system.go_straight_for_inches_using_time(inches, speed)
 
     def go_straight_for_inches_using_encoder(self,inches,speed):
-        self.robot.drive_system.go_straight_for_inches_using_encoder(inches, speed)
+        print('delegate success, go_straight_for_inches_using_encoder')
+        print(inches, speed)
+        self.robot.drive_system.go_straight_for_inches_using_encoder(int(inches), int(speed))
 
     def quit(self):
         self.stop_program = True
