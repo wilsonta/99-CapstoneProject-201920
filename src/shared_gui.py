@@ -146,7 +146,12 @@ def get_teleoperation_frame(window, mqtt_sender):
     desired_distance_for_ir_sensor_button_smart['command'] = lambda: handle_smart_to_distance(mqtt_sender,delta_for_ir_sensor_entry,desired_distance_for_ir_sensor_entry,right_speed_entry)
     desired_distance_for_ir_sensor_button_forwards['command'] = lambda: handle_forwards_to_distance(mqtt_sender,desired_distance_for_ir_sensor_entry,right_speed_entry)
     desired_distance_for_ir_sensor_button_backwards['command'] = lambda: handle_backwards_to_distance(mqtt_sender,desired_distance_for_ir_sensor_entry,right_speed_entry)
-
+    spin_clockwise_until_object['command'] = lambda: handle_spin_clockwise_until_object(mqtt_sender,
+                                                                                        spin_clockwise_entry_area,
+                                                                                        spin_clockwise_entry_speed)
+    spin_counterclockwise_until_object['command'] = lambda: handle_spin_counterclockwise_until_object(mqtt_sender,
+                                                                                                      spin_counterclockwise_entry_area,
+                                                                                                      spin_counterclockwise_entry_speed)
 
 
 
@@ -341,6 +346,17 @@ def handle_forwards_to_distance(mqtt_sender, desired_distance_for_ir_sensor_entr
 def handle_smart_to_distance(mqtt_sender, delta_for_ir_sensor_entry, desired_distance_for_ir_sensor_entry, right_entry_box):
     mqtt_sender.send_message('',[delta_for_ir_sensor_entry.get(), desired_distance_for_ir_sensor_entry.get(),right_entry_box.get()])
 
+def handle_spin_clockwise_until_object(mqtt_sender, spin_clockwise_entry_area, spin_clockwise_entry_speed):
+    area = int(spin_clockwise_entry_area.get())
+    speed= int(spin_clockwise_entry_speed.get())
+    print('Spinning clockwise at', speed, 'until object of area', area)
+    mqtt_sender.send_message('spin_clockwise_until_object')
+
+def handle_spin_counterclockwise_until_object(mqtt_sender, spin_counterclockwise_entry_area, spin_counterclockwise_entry_speed):
+    area = int(spin_counterclockwise_entry_area.get())
+    speed = int(spin_counterclockwise_entry_speed.get())
+    print('Spinning counterclockwise at', speed, 'until object of area', area)
+    mqtt_sender.send_message('spin_counterclockwise_until_object')
 
 ###############################################################################
 # Handlers for Buttons in the ArmAndClaw frame.
