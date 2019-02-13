@@ -77,3 +77,6 @@ class Respond_to_GUI_message(object):
     def go_distance_is_within(self, delta, inches, speed):
         self.robot.drive_system.go_until_distance_is_within(delta, inches, speed)
 
+    def increasing_tone(self,tone_freq_entry,delta_tone_entry):
+        self.robot.drive_system.go(0,0)
+

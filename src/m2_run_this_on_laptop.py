@@ -29,7 +29,7 @@ def main():
     # The root TK object for the GUI:
     # -------------------------------------------------------------------------
     root = tkinter.Tk()
-    root.title('CSSE 120 Capstone Project, Greg Wenning')
+    root.title('CSSE 120 Capstone Project, Matthew White')
 
 
     # -------------------------------------------------------------------------
@@ -41,7 +41,7 @@ def main():
     # -------------------------------------------------------------------------
     # Sub-frames for the shared GUI that the team developed:
     # -------------------------------------------------------------------------
-    teleop_frame, arm_frame, control_frame, sound_frame = get_shared_frames(main_frame, mqtt_sender)
+    teleop_frame, arm_frame, control_frame, sound_frame, m2_frame = get_shared_frames(main_frame, mqtt_sender)
 
     # -------------------------------------------------------------------------
     # Frames that are particular to my individual contributions to the project.
@@ -51,7 +51,7 @@ def main():
     # -------------------------------------------------------------------------
     # Grid the frames.
     # -------------------------------------------------------------------------
-    grid_frames(teleop_frame, arm_frame, control_frame, sound_frame)
+    grid_frames(teleop_frame, arm_frame, control_frame, sound_frame, m2_frame)
 
     # -------------------------------------------------------------------------
     # The event loop:
@@ -64,7 +64,7 @@ def get_shared_frames(main_frame, mqtt_sender):
     arm_frame= shared_gui.get_arm_frame(main_frame, mqtt_sender)
     control_frame = shared_gui.get_control_frame(main_frame, mqtt_sender)
     sound_frame = shared_gui.get_sound_frame(main_frame, mqtt_sender)
-    m2_frame = shared_gui.get_m2_frame((main_frame,mqtt_sender))
+    m2_frame = shared_gui.get_m2_frame(main_frame, mqtt_sender)
 
 
     return teleop_frame, arm_frame, control_frame, sound_frame, m2_frame

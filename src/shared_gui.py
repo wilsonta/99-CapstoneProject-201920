@@ -271,7 +271,7 @@ def get_m3_frame(window, mqtt_sender):
 
     return frame
 
-def get_m2_frame(window,mqtt_sender):
+def get_m2_frame(window, mqtt_sender):
     frame = ttk.Frame(window, padding=10, borderwidth=5, relief='ridge')
     frame.grid()
 
@@ -293,7 +293,7 @@ def get_m2_frame(window,mqtt_sender):
     tone_start_button = ttk.Button(frame, text = 'Go Pick it Up')
     tone_start_button.grid(row=1,column=2)
 
-    tone_start_button['command'] = lambda: handle_tone_start_button(mqtt_sender, tone_freq_entry,delta_tone_entry)
+    tone_start_button['command'] = lambda: handle_tone_start_button( tone_freq_entry,delta_tone_entry,mqtt_sender)
 
 
 
@@ -505,5 +505,5 @@ def handle_go_until_color_is(mqtt_sender, color_entry, right_speed_entry):
 
     mqtt_sender.send_message('go_until_color_is', [color_entry.get(), right_speed_entry.get()])
 
-def handle_tone_start_button(mqtt_sender, tone_freq_entry,delta_tone_entry):
-    mqtt_sender.send_message('increasing_tone',[tone_freq_entry,delta_tone_entry])
+def handle_tone_start_button( tone_freq_entry,delta_tone_entry,mqtt_sender):
+    mqtt_sender.send_message('increasing_tone',[tone_freq_entry.get(),delta_tone_entry.get()])
