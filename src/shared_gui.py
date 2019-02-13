@@ -364,7 +364,7 @@ def handle_speak(speak_entry, mqtt_sender):
     print(speak)
     mqtt_sender.send_message('speak', [speak])
 
-def handle_go_straight_for_seconds(mqtt_sender, right_speed_entry,time_entry):
+def handle_go_straight_for_seconds(mqtt_sender,time_entry, right_speed_entry):
     print('I will go straight for :', time_entry.get(),' sec, at a spped of: ', time_entry.get())
     seconds = int(time_entry.get())
     speed = int(right_speed_entry.get())
