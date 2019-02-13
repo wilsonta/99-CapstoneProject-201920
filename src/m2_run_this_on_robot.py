@@ -19,6 +19,7 @@ def main():
     """
     real_thing()
     #test_ir_sensor()
+    tone_as_you_get_closer()
 def real_thing():
     robot = rosebot.RoseBot()
     delegate = shared_gui_delegate_on_robot.Respond_to_GUI_message(robot)
@@ -32,6 +33,11 @@ def real_thing():
 def test_ir_sensor():
     robot = rosebot.RoseBot()
     robot.drive_system.go_backward_until_distance_is_greater_than(15,50)
+
+def tone_as_you_get_closer(speed):
+    robot = rosebot.RoseBot()
+    orig_distance = robot.sensor_system.ir_proximity_sensor.get_distance_in_inches()
+    robot.drive_system.go(speed,speed)
 
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.

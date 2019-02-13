@@ -270,6 +270,16 @@ def get_m3_frame(window, mqtt_sender):
     frame_label.grid(row=0, column=1)
 
     return frame
+
+def get_m2_frame(window,mqtt_sender):
+    frame = ttk.Frame(window, padding=10, borderwidth=5, relief='ridge')
+    frame.grid()
+
+    frame_label = ttk.Label(frame, text='not for Tim or Greg')
+    frame_label.grid(row=1,column=1)
+
+    return frame
+
 ###############################################################################
 ###############################################################################
 # The following specifies, for each Button,
