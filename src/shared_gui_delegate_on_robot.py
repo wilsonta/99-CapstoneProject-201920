@@ -49,6 +49,9 @@ class Respond_to_GUI_message(object):
     def m3_camera_data(self):
         self.robot.drive_system.display_camera_data()
 
+    def spin_clockwise_until_sees_object(self, speed, area):
+        self.robot.drive_system.spin_clockwise_until_sees_object(speed, area)
+
     def go_straight_for_seconds(self, seconds, speed):
         print('go_straight_for_seconds')
         self.robot.drive_system.go_straight_for_seconds(seconds, speed)

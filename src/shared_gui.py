@@ -387,13 +387,13 @@ def handle_spin_clockwise_until_object(mqtt_sender, spin_clockwise_entry_area, s
     area = int(spin_clockwise_entry_area.get())
     speed= int(spin_clockwise_entry_speed.get())
     print('Spinning clockwise at', speed, 'until object of area', area)
-    mqtt_sender.send_message('spin_clockwise_until_object')
+    mqtt_sender.send_message('spin_clockwise_until_sees_object', [speed, area])
 
 def handle_spin_counterclockwise_until_object(mqtt_sender, spin_counterclockwise_entry_area, spin_counterclockwise_entry_speed):
     area = int(spin_counterclockwise_entry_area.get())
     speed = int(spin_counterclockwise_entry_speed.get())
     print('Spinning counterclockwise at', speed, 'until object of area', area)
-    mqtt_sender.send_message('spin_counterclockwise_until_object')
+    mqtt_sender.send_message('spin_counterclockwise_until_sees_object', [speed], [area])
 
 ###############################################################################
 # Handlers for Buttons in the ArmAndClaw frame.
