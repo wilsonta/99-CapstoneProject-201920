@@ -31,7 +31,7 @@ def real_thing():
         time.sleep(0.01)
 def test_ir_sensor():
     robot = rosebot.RoseBot()
-    robot.drive_system.go_backward_until_distance_is_greater_than(11,50)
+    robot.drive_system.go_backward_until_distance_is_greater_than(15,50)
 
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
