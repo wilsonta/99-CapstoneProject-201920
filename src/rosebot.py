@@ -197,7 +197,7 @@ class DriveSystem(object):
 
         while True:
             print(self.sensor_system.ir_proximity_sensor.get_distance_in_inches())
-            if self.sensor_system.ir_proximity_sensor.get_distance_in_inches() <= inches:
+            if int(self.sensor_system.ir_proximity_sensor.get_distance_in_inches()) <= inches:
                 self.stop()
                 break
 
@@ -211,7 +211,7 @@ class DriveSystem(object):
 
         while True:
             print(self.sensor_system.ir_proximity_sensor.get_distance_in_inches())
-            if self.sensor_system.ir_proximity_sensor.get_distance_in_inches() >= inches:
+            if int(self.sensor_system.ir_proximity_sensor.get_distance_in_inches()) >= inches:
                 self.stop()
                 break
 
@@ -225,7 +225,7 @@ class DriveSystem(object):
         the robot should move until it is between 6.8 and 7.4 inches
         from the object.
         """
-        orig_distance = self.sensor_system.ir_proximity_sensor.get_distance_in_inches()
+        orig_distance = int(self.sensor_system.ir_proximity_sensor.get_distance_in_inches())
 
         if orig_distance + delta < inches & orig_distance - delta < inches:
             self.go(speed, speed)
@@ -234,7 +234,7 @@ class DriveSystem(object):
             self.go(-int(speed), -int(speed))
 
         while True:
-            if self.sensor_system.ir_proximity_sensor.get_distance_in_inches() <= inches + delta & self.sensor_system.ir_proximity_sensor.get_distance_in_inches() >= delta + inches:
+            if int(self.sensor_system.ir_proximity_sensor.get_distance_in_inches()) <= inches + delta & int(self.sensor_system.ir_proximity_sensor.get_distance_in_inches()) >= delta + inches:
                 self.stop()
     # -------------------------------------------------------------------------
     # Methods for driving that use the infrared beacon sensor.
@@ -317,7 +317,7 @@ class DriveSystem(object):
                 print(self.sensor_system.ir_proximity_sensor.get_distance_in_inches())
                 print(orig_tone_freq)
                 orig_distance = self.sensor_system.ir_proximity_sensor.get_distance_in_inches()
-                if self.sensor_system.ir_proximity_sensor.get_distance_in_inches() <= 2:
+                if int(self.sensor_system.ir_proximity_sensor.get_distance_in_inches()) <= 2:
                     self.stop()
                     arm_and_claw.raise_arm()
                     break
