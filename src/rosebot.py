@@ -324,19 +324,24 @@ class DriveSystem(object):
         touch_sensor = TouchSensor(1)
         arm_and_claw = ArmAndClaw(touch_sensor)
         while True:
-            if time.time() <= start_time + 5:
-                beeper.beep()
-                time.sleep(timer)
+            #if time.time() <= start_time + 5:
+            beeper.beep()
+            time.sleep(timer)
+            if self.sensor_system.ir_proximity_sensor.get_distance_in_inches()<=2:
+                self.stop()
+                arm_and_claw.raise_arm()
+                break
+            else:
                 if self.sensor_system.ir_proximity_sensor.get_distance() > distance:
                     timer = timer + .4
                     distance = self.sensor_system.ir_proximity_sensor.get_distance()
                 elif self.sensor_system.ir_proximity_sensor.get_distance() < distance:
                     timer = timer - .4
                     distance = self.sensor_system.ir_proximity_sensor.get_distance()
-            else:
-                self.stop()
-                arm_and_claw.raise_arm()
-                break
+            #if self.sensor_system.ir_proximity_sensor.get_distance_in_inches()<=2:
+                #self.stop()
+                #arm_and_claw.raise_arm()
+                #break
 
     def cycle_LED_lights(self, LED_initital_rate, LED_rate_cycle_increase):
         orig_distance = self.sensor_system.ir_proximity_sensor.get_distance()
