@@ -296,7 +296,7 @@ class DriveSystem(object):
         orig_distance = self.sensor_system.ir_proximity_sensor.get_distance()
         tone_maker = ToneMaker()
         self.go(speed,speed)
-        touch_sensor = TouchSensor()
+        touch_sensor = TouchSensor(1)
         arm_and_claw = ArmAndClaw(touch_sensor)
 
         while True:
