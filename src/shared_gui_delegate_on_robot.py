@@ -89,3 +89,5 @@ class Respond_to_GUI_message(object):
     def beep_as_it_runs(self, speed):
         self.robot.drive_system.beep_as_it_runs(speed)
 
+    def cycle_LED_lights(self, LED_initial_rate, LED_rate_cycle_increase):
+        self.robot.drive_system.cycle_LED_Lights(LED_initial_rate, LED_rate_cycle_increase)
