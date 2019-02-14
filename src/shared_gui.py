@@ -123,7 +123,7 @@ def get_teleoperation_frame(window, mqtt_sender):
     go_straight_for_inches_using_time_button.grid(row = 8, column = 1)
     go_straight_for_inches_using_encoder_button.grid(row = 8, column = 2)
     go_until_color_is_button.grid(row=12, column=0)
-    go_straight_until_color_is_not_button.grid(row=12, column=1)
+    go_straight_until_color_is_not_button.grid(row=13, column=0)
 
 
     # Set the button callbacks:
