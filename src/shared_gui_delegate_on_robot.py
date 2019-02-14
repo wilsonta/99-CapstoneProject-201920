@@ -91,3 +91,9 @@ class Respond_to_GUI_message(object):
 
     def cycle_LED_lights(self, LED_initial_rate, LED_rate_cycle_increase):
         self.robot.drive_system.cycle_LED_Lights(LED_initial_rate, LED_rate_cycle_increase)
+
+    def smart_clockwise(self,area_entry,speed_entry):
+        pass
+
+    def smart_counter_clockwise(self,area_entry,speed_entry):
+        pass

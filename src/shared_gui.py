@@ -325,10 +325,14 @@ def get_m2_frame(window, mqtt_sender):
     clockwise_button = ttk.Button(frame, text='spin clockwise and find')
     counter_clockwise_button = ttk.Button(frame, text='spin counter and find')
 
-    clockwise_button.grid(row=4,column=0)
-    counter_clockwise_button.grid(row=4,column=0)
+    area_entry = ttk.Entry(frame, width=8)
+    area_entry.grid(row=5,column=0)
 
-    clockwise_button['command'] = lambda: handle_clockwise_button()
+    clockwise_button.grid(row=4,column=0)
+    counter_clockwise_button.grid(row=4,column=1)
+
+    clockwise_button['command'] = lambda: handle_clockwise_button(area_entry,speed_entry,mqtt_sender)
+    counter_clockwise_button['command'] = lambda: handle_counter_clockwise_button(area_entry,speed_entry,mqtt_sender)
 
 
     return frame
@@ -430,13 +434,13 @@ def handle_camera_data(mqtt_sender):
     mqtt_sender.send_message('m3_camera_data')
 
 def handle_backwards_to_distance(mqtt_sender, desired_distance_for_ir_sensor_entry, right_entry_box):
-    mqtt_sender.send_message('',[desired_distance_for_ir_sensor_entry.get(),right_entry_box.get()])
+    mqtt_sender.send_message('go_backward_distance_is_greater_than',[desired_distance_for_ir_sensor_entry.get(),right_entry_box.get()])
 
 def handle_forwards_to_distance(mqtt_sender, desired_distance_for_ir_sensor_entry, right_entry_box):
-    mqtt_sender.send_message('',[desired_distance_for_ir_sensor_entry.get(),right_entry_box.get()])
+    mqtt_sender.send_message('go_forward_distance_is_less_than',[desired_distance_for_ir_sensor_entry.get(),right_entry_box.get()])
 
 def handle_smart_to_distance(mqtt_sender, delta_for_ir_sensor_entry, desired_distance_for_ir_sensor_entry, right_entry_box):
-    mqtt_sender.send_message('',[delta_for_ir_sensor_entry.get(), desired_distance_for_ir_sensor_entry.get(),right_entry_box.get()])
+    mqtt_sender.send_message('go_distance_is_within',[delta_for_ir_sensor_entry.get(), desired_distance_for_ir_sensor_entry.get(),right_entry_box.get()])
 
 def handle_spin_clockwise_until_object(mqtt_sender, spin_clockwise_entry_area, spin_clockwise_entry_speed):
     area = int(spin_clockwise_entry_area.get())
@@ -571,3 +575,9 @@ def handle_tone_start_button(right_speed_entry, tone_freq_entry,delta_tone_entry
 
 def handle_beep_as_it_runs(mqtt_sender,m1_speed_entry):
     mqtt_sender.send_message('beep_as_it_runs', [m1_speed_entry.get()])
+
+def handle_clockwise_button(area_entry,speed_entry,mqtt_sender):
+    mqtt_sender.send_message('smart_clockwise',[area_entry,speed_entry])
+
+def handle_counter_clockwise_button(area_entry,speed_entry,mqtt_sender):
+    mqtt_sender.send_message('smart_counter_clockwise',[area_entry,speed_entry])
