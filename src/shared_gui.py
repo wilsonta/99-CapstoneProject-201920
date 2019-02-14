@@ -327,13 +327,18 @@ def get_m1_frame(window, mqtt_sender):
     frame.grid()
 
     frame_label = ttk.Label(frame, text='m1 Stuff')
-    beep_sensor_button = ttk.Button(frame, text='Beep Sensor')
-    beep_sensor_entry = ttk.Entry(frame, width=8)
+    beep_sensor_button = ttk.Button(frame, text='Beep Faster when Closer')
+    m1_speed_label=ttk.Label(frame, text='Speed')
+    m1_speed_entry=ttk.Entry(frame, width=8)
+    m1_speed_entry.insert(0,'100')
 
 
-    frame_label.grid(row=0, column=1)
-    beep_sensor_button.grid(row=1, column=0)
-    beep_sensor_entry.grid(row=2, column=0)
+    frame_label.grid(row=0, column=0)
+    beep_sensor_button.grid(row=3, column=0)
+    m1_speed_label.grid(row=1, column=0)
+    m1_speed_entry.grid(row=2,column=0)
+
+    beep_sensor_button['command']= lambda: handle_beep_as_it_runs(mqtt_sender,m1_speed_entry)
 
     return frame
 
@@ -552,3 +557,6 @@ def handle_go_until_color_is(mqtt_sender, color_entry, right_speed_entry):
 
 def handle_tone_start_button(right_speed_entry, tone_freq_entry,delta_tone_entry,mqtt_sender):
     mqtt_sender.send_message('increasing_tone',[right_speed_entry.get(),tone_freq_entry.get(),delta_tone_entry.get()])
+
+def handle_beep_as_it_runs(mqtt_sender,m1_speed_entry):
+    mqtt_sender.send_message('beep_as_it_runs', [m1_speed_entry.get()])
