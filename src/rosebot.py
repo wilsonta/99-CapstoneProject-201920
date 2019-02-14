@@ -305,6 +305,7 @@ class DriveSystem(object):
                 orig_distance = self.sensor_system.ir_proximity_sensor.get_distance_in_inches()
                 if self.sensor_system.ir_proximity_sensor.get_distance_in_inches() <= 6:
                     self.stop()
+                    break
 
 
 
