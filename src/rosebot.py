@@ -163,6 +163,9 @@ class DriveSystem(object):
             if color_sensor.get_color_as_name()==color:
                 self.stop()
                 break
+            elif color_sensor.get_color()==color:
+                self.stop()
+                break
 
     def go_straight_until_color_is_not(self, color, speed):
         """
@@ -176,6 +179,9 @@ class DriveSystem(object):
         while True:
             self.go(speed,speed)
             if color_sensor.get_color_as_name()!=color:
+                self.stop()
+                break
+            elif color_sensor.get_color()!=color:
                 self.stop()
                 break
     # -------------------------------------------------------------------------
@@ -319,12 +325,10 @@ class DriveSystem(object):
         timer = 1.4
         distance = self.sensor_system.ir_proximity_sensor.get_distance()
         self.go(speed,speed)
-        start_time = time.time()
         beeper=Beeper()
         touch_sensor = TouchSensor(1)
         arm_and_claw = ArmAndClaw(touch_sensor)
         while True:
-            #if time.time() <= start_time + 5:
             beeper.beep()
             time.sleep(timer)
             if self.sensor_system.ir_proximity_sensor.get_distance_in_inches()<=2:
@@ -338,10 +342,6 @@ class DriveSystem(object):
                 elif self.sensor_system.ir_proximity_sensor.get_distance() < distance:
                     timer = timer - .4
                     distance = self.sensor_system.ir_proximity_sensor.get_distance()
-            #if self.sensor_system.ir_proximity_sensor.get_distance_in_inches()<=2:
-                #self.stop()
-                #arm_and_claw.raise_arm()
-                #break
 
     def cycle_LED_lights(self, LED_initital_rate, LED_rate_cycle_increase):
         orig_distance = self.sensor_system.ir_proximity_sensor.get_distance()
