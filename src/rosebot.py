@@ -179,10 +179,10 @@ class DriveSystem(object):
         while True:
             if color_sensor.get_color_as_name()==color:
                 self.go(speed,speed)
-                break
             elif color_sensor.get_color()==color:
                 self.go(speed,speed)
             else:
+                print('stop')
                 self.stop()
                 break
     # -------------------------------------------------------------------------
