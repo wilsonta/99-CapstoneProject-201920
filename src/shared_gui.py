@@ -318,6 +318,17 @@ def get_m2_frame(window, mqtt_sender):
 
     tone_start_button['command'] = lambda: handle_tone_start_button(speed_entry,tone_freq_entry,delta_tone_entry,mqtt_sender)
 
+    #########################################
+    # Sprint 2 Feature 8
+    #########################################
+
+    clockwise_button = ttk.Button(frame, text='spin clockwise and find')
+    counter_clockwise_button = ttk.Button(frame, text='spin counter and find')
+
+    clockwise_button.grid(row=4,column=0)
+    counter_clockwise_button.grid(row=4,column=0)
+
+    clockwise_button['command'] = lambda: handle_clockwise_button()
 
 
     return frame

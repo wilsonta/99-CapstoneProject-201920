@@ -263,6 +263,7 @@ class DriveSystem(object):
         """
         #Displays on the GUI the Blob data of the Blob that the camera sees
         #if any).
+
     def display_camera_data(self):
         print(self.sensor_system.camera.get_biggest_blob())
 
@@ -278,6 +279,8 @@ class DriveSystem(object):
             if self.sensor_system.camera.get_biggest_blob().get_area() > area:
                 break
         self.stop()
+
+
     def spin_counterclockwise_until_sees_object(self, speed, area):
         """
         Spins counter-clockwise at the given speed until the camera sees an object
