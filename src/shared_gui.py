@@ -265,9 +265,26 @@ def get_sound_frame(window, mqtt_sender):
 def get_m3_frame(window, mqtt_sender):
     frame = ttk.Frame(window, padding=10, borderwidth=5, relief='ridge')
     frame.grid()
-
+    #Labels
     frame_label = ttk.Label(frame, text='m3 frame')
+    LED_intitial_cycle_rate_label = ttk.Label(frame, text='LED initial cycle rate')
+    LED_rate_of_increase_label = ttk.Label(frame, text='LED rate of cycle increase')
+    #Entry
+    LED_intitial_cycle_rate_entry = ttk.Entry(frame, width=8)
+    LED_rate_of_increase_entry = ttk.Entry(frame, width=8)
+
+    #Buttons
+    LED_cycle_button = ttk.Button(frame, text='LED cycle')
+    #Grids
     frame_label.grid(row=0, column=1)
+    LED_intitial_cycle_rate_label.grid(row=1, column=0)
+    LED_rate_of_increase_label.grid(row=1, column=2)
+    LED_intitial_cycle_rate_entry.grid(row=2, column=0)
+    LED_rate_of_increase_entry.grid(row=2, column=2)
+    LED_cycle_button.grid(row=2, column=3)
+    #Commands
+    LED_cycle_button['command'] = lambda: handle_LED_cycle_lights(mqtt_sender, LED_intitial_cycle_rate_entry, LED_rate_of_increase_entry)
+
 
     return frame
 
@@ -312,6 +329,7 @@ def get_m1_frame(window, mqtt_sender):
     frame_label = ttk.Label(frame, text='m1 Stuff')
     beep_sensor_button = ttk.Button(frame, text='Beep Sensor')
     beep_sensor_entry = ttk.Entry(frame, width=8)
+
 
     frame_label.grid(row=0, column=1)
     beep_sensor_button.grid(row=1, column=0)
@@ -415,6 +433,12 @@ def handle_spin_counterclockwise_until_object(mqtt_sender, spin_counterclockwise
     speed = int(spin_counterclockwise_entry_speed.get())
     print('Spinning counterclockwise at', speed, 'until object of area', area)
     mqtt_sender.send_message('spin_counterclockwise_until_sees_object', [speed], [area])
+
+def handle_LED_cycle_lights(mqtt_sender, LED_initial_rate_entry, LED_rate_cycle_increase_entry):
+    LED_initial_rate = int(LED_initial_rate_entry.get())
+    LED_rate_cyle_increase = int(LED_rate_cycle_increase_entry.get())
+    print('Cycling LED lights initially at', LED_initial_rate, 'and increases at a rate of', LED_rate_cyle_increase)
+    mqtt_sender.send_message('cycle_LED_lights', LED_initial_rate, LED_rate_cyle_increase)
 
 ###############################################################################
 # Handlers for Buttons in the ArmAndClaw frame.
