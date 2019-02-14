@@ -303,7 +303,7 @@ class DriveSystem(object):
                 tone_maker.play_tone(orig_tone_freq, 250)
                 orig_tone_freq = orig_tone_freq + delta_tone
                 print(self.sensor_system.ir_proximity_sensor.get_distance_in_inches())
-                orig_distance = self.sensor_system.ir_proximity_sensor.get_distance_in_inches()
+                orig_distance = self.sensor_system.ir_proximity_sensor.get_distance_in_inches() + 2
                 if self.sensor_system.ir_proximity_sensor.get_distance_in_inches() <= 2:
                     self.stop()
                     break
