@@ -18,7 +18,8 @@ def main():
       2. Communicates via MQTT with the GUI code that runs on the LAPTOP.
     """
     real_thing()
-    #test_ir_sensor()
+    #test_ir_snesor()
+    #test_spin()
 def real_thing():
     robot = rosebot.RoseBot()
     delegate = shared_gui_delegate_on_robot.Respond_to_GUI_message(robot)
@@ -33,7 +34,9 @@ def test_ir_sensor():
     robot = rosebot.RoseBot()
     robot.drive_system.go_backward_until_distance_is_greater_than(15,50)
 
-
+def test_spin():
+    robot = rosebot.RoseBot()
+    robot.drive_system.spin_clockwise_until_sees_object(30,100)
 
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
