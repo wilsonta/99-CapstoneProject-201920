@@ -56,6 +56,7 @@ def get_teleoperation_frame(window, mqtt_sender):
     time_entry = ttk.Entry(frame, width = 8)
     time_entry.insert(0,"0")
     color_entry = ttk.Entry(frame, width=8)
+    color_entry.insert(0,'')
     desired_distance_for_ir_sensor_entry = ttk.Entry(frame, width=8)
     delta_for_ir_sensor_entry = ttk.Entry(frame, width=8)
     spin_clockwise_entry_speed = ttk.Entry(frame, width=8)
