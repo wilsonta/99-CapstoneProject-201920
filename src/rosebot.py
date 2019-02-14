@@ -334,8 +334,10 @@ class DriveSystem(object):
 
     def cycle_LED_lights(self, LED_initital_rate, LED_rate_cycle_increase):
         orig_distance = self.sensor_system.ir_proximity_sensor.get_distance()
-        tone_maker = ToneMaker()
+        LED
         self.go(70, 70)
+        arm_and_claw = ArmAndClaw(touch_sensor)
+
 
         while True:
             if self.sensor_system.ir_proximity_sensor.get_distance_in_inches() <= orig_distance:
