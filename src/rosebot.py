@@ -293,18 +293,18 @@ class DriveSystem(object):
 
     def tone_as_you_get_closer(self,orig_tone_freq,delta_tone,speed):
 
-        orig_distance = self.sensor_system.ir_proximity_sensor.get_distance_in_inches()
+        orig_distance = self.sensor_system.ir_proximity_sensor.get_distance()
         tone_maker = ToneMaker()
         self.go(speed,speed)
 
 
         while True:
-            if self.sensor_system.ir_proximity_sensor.get_distance_in_inches() <= orig_distance:
+            if self.sensor_system.ir_proximity_sensor.get_distance() <= orig_distance:
                 tone_maker.play_tone(orig_tone_freq, 250)
                 orig_tone_freq = orig_tone_freq + delta_tone
-                print(self.sensor_system.ir_proximity_sensor.get_distance_in_inches())
-                orig_distance = self.sensor_system.ir_proximity_sensor.get_distance_in_inches() + 2
-                if self.sensor_system.ir_proximity_sensor.get_distance_in_inches() <= 2:
+                print(self.sensor_system.ir_proximity_sensor.get_distance())
+                orig_distance = self.sensor_system.ir_proximity_sensor.get_distance() + 2
+                if self.sensor_system.ir_proximity_sensor.get_distance() <= 6:
                     self.stop()
                     break
 
