@@ -581,7 +581,9 @@ def handle_beep_as_it_runs(mqtt_sender,m1_speed_entry):
     mqtt_sender.send_message('beep_as_it_runs', [m1_speed_entry.get()])
 
 def handle_clockwise_button(area_entry,speed_entry,tone_freq_entry,delta_tone_entry,mqtt_sender):
+    print("spin clockwise and find")
     mqtt_sender.send_message('smart_clockwise_m2',[area_entry,speed_entry,tone_freq_entry,delta_tone_entry,mqtt_sender])
 
 def handle_counter_clockwise_button(area_entry,speed_entry,tone_freq_entry,delta_tone_entry,mqtt_sender):
+    print("spin counter clockwise and find")
     mqtt_sender.send_message('smart_counter_clockwise_m2',[area_entry,speed_entry,tone_freq_entry,delta_tone_entry,mqtt_sender])
