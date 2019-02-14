@@ -74,6 +74,9 @@ class Respond_to_GUI_message(object):
     def go_until_color_is(self,color, speed):
         self.robot.drive_system.go_straight_until_color_is(color,speed)
 
+    def go_straight_until_color_is_not(self, color, speed):
+        self.robot.drive_system.go_straight_until_color_is_not(color,speed)
+
     def go_forward_distance_is_less_than(self, inches, speed):
         self.robot.drive_system.go_forward_until_distance_is_less_than(inches,speed)
 

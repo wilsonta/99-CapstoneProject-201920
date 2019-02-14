@@ -74,6 +74,7 @@ def get_teleoperation_frame(window, mqtt_sender):
     go_straight_for_inches_using_encoder_button = ttk.Button(frame, text="Straight for # of inches (encoders)")
     camera_data_button = ttk.Button(frame, text='camera data')
     go_until_color_is_button = ttk.Button(frame, text='Go to Color')
+    go_straight_until_color_is_not_button= ttk.Button(frame, text='Go Until Color isnt')
     desired_distance_for_ir_sensor_button_backwards = ttk.Button(frame, text = 'Move Backwards to Desired Distance')
     desired_distance_for_ir_sensor_button_forwards = ttk.Button(frame, text = 'Move Forwards to the Desired Distance')
     desired_distance_for_ir_sensor_button_smart = ttk.Button(frame, text = 'Smart Move to Distance')
@@ -122,6 +123,7 @@ def get_teleoperation_frame(window, mqtt_sender):
     go_straight_for_inches_using_time_button.grid(row = 8, column = 1)
     go_straight_for_inches_using_encoder_button.grid(row = 8, column = 2)
     go_until_color_is_button.grid(row=12, column=0)
+    go_straight_until_color_is_not_button.grid(row=12, column=1)
 
 
     # Set the button callbacks:
@@ -143,6 +145,7 @@ def get_teleoperation_frame(window, mqtt_sender):
                                                                                                                  inches_entry,right_speed_entry)
     camera_data_button['command'] = lambda: handle_camera_data(mqtt_sender)
     go_until_color_is_button['command'] =lambda: handle_go_until_color_is(mqtt_sender,color_entry,right_speed_entry)
+    go_straight_until_color_is_not_button['command'] =lambda: handle_go_straight_until_color_is_not(mqtt_sender, color_entry,right_speed_entry)
 
     desired_distance_for_ir_sensor_button_smart['command'] = lambda: handle_smart_to_distance(mqtt_sender,delta_for_ir_sensor_entry,desired_distance_for_ir_sensor_entry,right_speed_entry)
     desired_distance_for_ir_sensor_button_forwards['command'] = lambda: handle_forwards_to_distance(mqtt_sender,desired_distance_for_ir_sensor_entry,right_speed_entry)
@@ -573,6 +576,11 @@ def handle_go_until_color_is(mqtt_sender, color_entry, right_speed_entry):
     print('I am going until', color_entry.get(), 'in a speed of:', right_speed_entry.get())
 
     mqtt_sender.send_message('go_until_color_is', [color_entry.get(), right_speed_entry.get()])
+
+def handle_go_straight_until_color_is_not(mqtt_sender, color_entry, right_speed_entry):
+    print('I am going until color is not', color_entry.get(), 'in a speed of:', right_speed_entry.get())
+
+    mqtt_sender.send_message('go_straight_until_color_is_not', [color_entry.get(), right_speed_entry.get()])
 
 def handle_tone_start_button(right_speed_entry, tone_freq_entry,delta_tone_entry,mqtt_sender):
     mqtt_sender.send_message('increasing_tone',[right_speed_entry.get(),tone_freq_entry.get(),delta_tone_entry.get()])
