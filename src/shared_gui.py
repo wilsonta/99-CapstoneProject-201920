@@ -299,6 +299,21 @@ def get_m2_frame(window, mqtt_sender):
 
     return frame
 
+def get_m1_frame(window, mqtt_sender):
+    frame = ttk.Frame(window, padding=10, borderwidth=5, relief='ridge')
+    frame.grid()
+
+    frame_label = ttk.Label(frame, text='m1 Stuff')
+    beep_sensor_button = ttk.Button(frame, text='Beep Sensor')
+    beep_sensor_entry = ttk.Entry(frame, width=8)
+
+    frame_label.grid(row=0, column=1)
+    beep_sensor_button.grid(row=1, column=0)
+    beep_sensor_entry.grid(row=2, column=0)
+
+    return frame
+
+
 ###############################################################################
 ###############################################################################
 # The following specifies, for each Button,
