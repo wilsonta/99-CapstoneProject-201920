@@ -308,6 +308,26 @@ class DriveSystem(object):
                     self.stop()
                     break
 
+    def beep_as_it_runs(self, speed):
+        timer = 1.4
+        distance = self.sensor_system.ir_proximity_sensor.get_distance()
+        self.go(speed,speed)
+        start_time = time.time()
+        beeper=Beeper()
+        while True:
+            if time.time() <= start_time + 5:
+                beeper.beep()
+                time.sleep(timer)
+                if self.sensor_system.ir_proximity_sensor.get_distance() > distance:
+                    timer = timer + .4
+                    distance = self.sensor_system.ir_proximity_sensor.get_distance()
+                elif self.sensor_system.ir_proximity_sensor.get_distance() < distance:
+                    timer = timer - .4
+                    distance = self.sensor_system.ir_proximity_sensor.get_distance()
+            else:
+                self.stop()
+                break
+
 
 
 ###############################################################################

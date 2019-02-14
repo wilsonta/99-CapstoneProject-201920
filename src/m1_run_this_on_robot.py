@@ -42,10 +42,10 @@ def run_test_drive_system():
     #robot.drive_system.go_straight_for_inches_using_encoder(8, -70)
     #robot.drive_system.go_straight_until_color_is('Blue',100)
     #robot.drive_system.go_straight_until_color_is_not('Blue',100)
-    beep_as_it_runs()
+    robot.drive_system.beep_as_it_runs(100)
 
 def beep_as_it_runs():
-    timer=1
+    timer=1.4
     robot=rosebot.RoseBot()
     distance=robot.sensor_system.ir_proximity_sensor.get_distance()
     robot.drive_system.go(50,50)
