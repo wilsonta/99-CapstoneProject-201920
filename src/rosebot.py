@@ -299,9 +299,11 @@ class DriveSystem(object):
 
 
         while True:
-            tone_maker.play_tone(orig_tone_freq, 250).wait()
-            orig_tone_freq = orig_tone_freq + delta_tone
-            if self.sensor_system.ir_proximity_sensor.get_distance_in_inches() <= 6:
+            if self.sensor_system.ir_proximity_sensor.get_distance_in_inches() <= orig_distance:
+                tone_maker.play_tone(orig_tone_freq, 250).wait()
+                orig_tone_freq = orig_tone_freq + delta_tone
+                orig_distance = self.sensor_system.ir_proximity_sensor.get_distance_in_inches()
+                if self.sensor_system.ir_proximity_sensor.get_distance_in_inches() <= 6:
                 self.stop()
 
 
