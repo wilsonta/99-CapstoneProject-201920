@@ -318,6 +318,8 @@ class DriveSystem(object):
         self.go(speed,speed)
         start_time = time.time()
         beeper=Beeper()
+        touch_sensor = TouchSensor(1)
+        arm_and_claw = ArmAndClaw(touch_sensor)
         while True:
             if time.time() <= start_time + 5:
                 beeper.beep()
@@ -330,6 +332,7 @@ class DriveSystem(object):
                     distance = self.sensor_system.ir_proximity_sensor.get_distance()
             else:
                 self.stop()
+                arm_and_claw.raise_arm()
                 break
 
     def cycle_LED_lights(self, LED_initital_rate, LED_rate_cycle_increase):
