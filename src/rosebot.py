@@ -163,9 +163,9 @@ class DriveSystem(object):
             if color_sensor.get_color_as_name()==color:
                 self.stop()
                 break
-            elif color_sensor.get_color()==int(color):
-                self.stop()
-                break
+            #elif color_sensor.get_color()==(color):
+                #self.stop()
+                #break
 
     def go_straight_until_color_is_not(self, color, speed):
         """
@@ -179,8 +179,8 @@ class DriveSystem(object):
         while True:
             if color_sensor.get_color_as_name()==color:
                 self.go(speed,speed)
-            elif color_sensor.get_color()==int(color):
-                self.go(speed,speed)
+            #elif color_sensor.get_color()==(color):
+                #self.go(speed,speed)
             else:
                 print('stop')
                 self.stop()
