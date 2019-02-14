@@ -328,6 +328,9 @@ def get_m2_frame(window, mqtt_sender):
     area_entry = ttk.Entry(frame, width=8)
     area_entry.grid(row=5,column=0)
 
+    area_label = ttk.Label(frame, text='Minimum Area')
+    area_label.grid(row=6,column=0)
+
     clockwise_button.grid(row=4,column=0)
     counter_clockwise_button.grid(row=4,column=1)
 
