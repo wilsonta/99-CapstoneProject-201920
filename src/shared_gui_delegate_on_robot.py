@@ -92,8 +92,10 @@ class Respond_to_GUI_message(object):
     def cycle_LED_lights(self, LED_initial_rate, LED_rate_cycle_increase):
         self.robot.drive_system.cycle_LED_Lights(LED_initial_rate, LED_rate_cycle_increase)
 
-    def smart_clockwise(self,area_entry,speed_entry):
-        pass
+    def smart_clockwise_m2(self,area_entry,speed_entry,tone_freq_entry,delta_tone_entry):
+        self.robot.drive_system.spin_clockwise_until_sees_object(speed_entry,area_entry)
+        self.robot.drive_system.tone_as_you_get_closer(tone_freq_entry,delta_tone_entry,speed_entry)
 
-    def smart_counter_clockwise(self,area_entry,speed_entry):
-        pass
+    def smart_counter_clockwise_m2(self,area_entry,speed_entry,tone_freq_entry,delta_tone_entry):
+        self.robot.drive_system.spin_counterclockwise_until_sees_object(speed_entry,area_entry)
+        self.robot.drive_system.tone_as_you_get_closer(tone_freq_entry,delta_tone_entry,speed_entry)
