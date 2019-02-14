@@ -86,3 +86,6 @@ class Respond_to_GUI_message(object):
     def increasing_tone(self,speed,orig_tone,delta_tone):
         self.robot.drive_system.tone_as_you_get_closer(orig_tone,delta_tone,speed)
 
+    def beep_as_it_runs(self, speed):
+        self.robot.drive_system.beep_as_it_runs(speed)
+
