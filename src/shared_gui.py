@@ -461,7 +461,7 @@ def handle_LED_cycle_lights(mqtt_sender, LED_initial_rate_entry, LED_rate_cycle_
     LED_initial_rate = int(LED_initial_rate_entry.get())
     LED_rate_cyle_increase = int(LED_rate_cycle_increase_entry.get())
     print('Cycling LED lights initially at', LED_initial_rate, 'and increases at a rate of', LED_rate_cyle_increase)
-    mqtt_sender.send_message('cycle_LED_lights', LED_initial_rate, LED_rate_cyle_increase)
+    mqtt_sender.send_message('cycle_LED_lights', [LED_initial_rate, LED_rate_cyle_increase])
 
 ###############################################################################
 # Handlers for Buttons in the ArmAndClaw frame.

@@ -340,23 +340,29 @@ class DriveSystem(object):
 
     def cycle_LED_lights(self, LED_initital_rate, LED_rate_cycle_increase):
         orig_distance = self.sensor_system.ir_proximity_sensor.get_distance()
-        LED
+        left_LED = LED('left')
+        right_LED = LED('right')
+        touch_sensor = TouchSensor(1)
         self.go(70, 70)
         arm_and_claw = ArmAndClaw(touch_sensor)
 
 
-        while True:
-            if self.sensor_system.ir_proximity_sensor.get_distance_in_inches() <= orig_distance:
-                tone_maker.play_tone(LED_initital_rate, 250)
-                orig_tone_freq = str(int(LED_initital_rate) + int(LED_rate_cycle_increase))
 
+        while True:
+            left_LED.turn_on()
+            time.sleep(LED_initital_rate/100)
+            right_LED.turn_on()
+            time.sleep(LED_initital_rate/100)
+            if self.sensor_system.ir_proximity_sensor.get_distance_in_inches() <= orig_distance:
+                LED_initital_rate = LED_initital_rate-LED_rate_cycle_increase
                 print(self.sensor_system.ir_proximity_sensor.get_distance_in_inches())
-                print(orig_tone_freq)
                 orig_distance = self.sensor_system.ir_proximity_sensor.get_distance_in_inches()
                 if self.sensor_system.ir_proximity_sensor.get_distance_in_inches() <= 2:
                     self.stop()
+                    arm_and_claw.raise_arm()
                     break
-
+            left_LED.turn_off()
+            right_LED.turn_off()
 
 ###############################################################################
 #    ArmAndClaw
