@@ -109,6 +109,7 @@ class DriveSystem(object):
         seconds = abs(inches * seconds_per_inch_at_100 / speed)
 
         self.go_straight_for_seconds(seconds, speed)
+
     def go_straight_for_inches_using_encoder(self, inches, speed):
         """
         Makes the robot go straight (forward if speed > 0, else backward)
@@ -289,6 +290,15 @@ class DriveSystem(object):
             if self.sensor_system.camera.get_biggest_blob().get_area() > area:
                 break
         self.stop()
+
+    def tone_as_you_get_closer(self,orig_tone_freq,delta_tone,speed):
+
+        orig_distance = self.sensor_system.ir_proximity_sensor.get_distance_in_inches()
+
+        self.go(speed,speed)
+
+        while True:
+            self.
 
 
 

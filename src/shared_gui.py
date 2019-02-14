@@ -275,6 +275,12 @@ def get_m2_frame(window, mqtt_sender):
     frame = ttk.Frame(window, padding=10, borderwidth=5, relief='ridge')
     frame.grid()
 
+    speed_label=ttk.Label(frame, text='Speed')
+    speed_label.grid(row=0,column=3)
+
+    speed_entry=ttk.Entry(frame, width=8)
+    speed_entry.grid(row=1,column=3)
+
     frame_label = ttk.Label(frame, text='not for Tim or Greg')
     frame_label.grid(row=2,column=1)
 
@@ -293,7 +299,7 @@ def get_m2_frame(window, mqtt_sender):
     tone_start_button = ttk.Button(frame, text = 'Go Pick it Up')
     tone_start_button.grid(row=1,column=2)
 
-    tone_start_button['command'] = lambda: handle_tone_start_button( tone_freq_entry,delta_tone_entry,mqtt_sender)
+    tone_start_button['command'] = lambda: handle_tone_start_button(speed_entry,tone_freq_entry,delta_tone_entry,mqtt_sender)
 
 
 
@@ -520,5 +526,5 @@ def handle_go_until_color_is(mqtt_sender, color_entry, right_speed_entry):
 
     mqtt_sender.send_message('go_until_color_is', [color_entry.get(), right_speed_entry.get()])
 
-def handle_tone_start_button( tone_freq_entry,delta_tone_entry,mqtt_sender):
-    mqtt_sender.send_message('increasing_tone',[tone_freq_entry.get(),delta_tone_entry.get()])
+def handle_tone_start_button(right_speed_entry, tone_freq_entry,delta_tone_entry,mqtt_sender):
+    mqtt_sender.send_message('increasing_tone',[right_speed_entry.get(),tone_freq_entry.get(),delta_tone_entry.get()])
