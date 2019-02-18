@@ -370,23 +370,6 @@ class DriveSystem(object):
                     break
             left_LED.turn_off()
             right_LED.turn_off()
-    def m1_pit_stop(self,speed):
-        self.go(0,speed)
-        time.sleep(.4)
-        self.go(speed,speed)
-        time.sleep(.8)
-        self.go(speed,0)
-        time.sleep(.4)
-        self.stop()
-        touch_sensor=TouchSensor(1)
-        arm_and_claw= ArmAndClaw(touch_sensor)
-        arm_and_claw.calibrate_arm()
-        self.go(speed, 0)
-        time.sleep(.4)
-        self.go(speed, speed)
-        time.sleep(.8)
-        self.go(0, speed)
-        self.stop()
 
 ###############################################################################
 #    ArmAndClaw
