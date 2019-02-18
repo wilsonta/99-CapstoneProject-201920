@@ -9,6 +9,7 @@ import rosebot
 import mqtt_remote_method_calls as com
 import time
 import shared_gui_delegate_on_robot
+import m1_Sprint3_gui_delegate
 
 def main():
     """
@@ -18,12 +19,22 @@ def main():
     """
     #run_test_drive_system()
     #run_test_arm()
-    real_thing()
+    #real_thing()
+    real_thing_Sprint3()
 
 
 def real_thing():
     robot = rosebot.RoseBot()
     delegate = shared_gui_delegate_on_robot.Respond_to_GUI_message(robot)
+    mqtt_receiver = com.MqttClient(delegate)
+    mqtt_receiver.connect_to_pc()
+
+    while True:
+        time.sleep(.01)
+
+def real_thing_Sprint3():
+    robot = rosebot.RoseBot()
+    delegate = m1_Sprint3_gui_delegate.m1_Respond_to_GUI_message(robot)
     mqtt_receiver = com.MqttClient(delegate)
     mqtt_receiver.connect_to_pc()
 
