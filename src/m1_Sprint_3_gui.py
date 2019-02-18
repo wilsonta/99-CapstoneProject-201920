@@ -20,7 +20,7 @@ def get_m1_sprint_3_frame(window, mqtt_sender):
     pit_stop_button=ttk.Button(frame, text='Pit Stop')
     celebrate_button= ttk.Button(frame, text='Celebrate')
     follow_track_button= ttk.Button(frame, text='Follow Track')
-    follow_pace_car_button= ttk.Button(frame, text='Follow Pace Car')
+    follow_pacecar_button= ttk.Button(frame, text='Follow Pace Car')
     stop_off_track_button= ttk.Button(frame, text='Stop off Track')
     avoid_collision_button= ttk.Button(frame, text='Avoid Collision')
     follow_path_button= ttk.Button(frame, text='Follow Path')
@@ -40,7 +40,7 @@ def get_m1_sprint_3_frame(window, mqtt_sender):
     pit_stop_button.grid(row=3, column=0)
     celebrate_button.grid(row=3, column=1)
     follow_track_button.grid(row=3, column=2)
-    follow_pace_car_button.grid(row=4, column=0)
+    follow_pacecar_button.grid(row=4, column=0)
     stop_off_track_button.grid(row=4, column=1)
     avoid_collision_button.grid(row=4, column=2)
     follow_path_button.grid(row=5, column=0)
@@ -51,6 +51,7 @@ def get_m1_sprint_3_frame(window, mqtt_sender):
     stop_off_track_button['command']= lambda: handle_m1_stop_off_track(mqtt_sender, m1_color_entry, m1_speed_entry)
     avoid_collision_button['command']= lambda: handle_avoid_collision(mqtt_sender, m1_speed_entry)
     celebrate_button['command']= lambda: handle_celebrate(mqtt_sender, m1_speed_entry, m1_area_entry)
+    follow_pacecar_button['command']= lambda: handle_follow_pacecar(mqtt_sender,m1_speed_entry)
 
     return frame
 
@@ -71,3 +72,6 @@ def handle_celebrate(mqtt_sender, m1_speed_entry, m1_area_entry):
     m1_speed_entry=int(m1_speed_entry.get())
     m1_area_entry=int(m1_area_entry.get())
     mqtt_sender.send_message('m1_celebrate', [m1_speed_entry, m1_area_entry])
+
+def handle_follow_pacecar(mqtt_sender, m1_speed_entry):
+    mqtt_sender.send_message('m1_follow_pacecar', [m1_speed_entry])

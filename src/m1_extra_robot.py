@@ -38,3 +38,23 @@ def m1_celebrate(robot, speed, area):
     time.sleep(5)
     robot.drive_system.stop()
 
+def move_left_with_camera(robot, speed):
+    #robot= rosebot.RoseBot()
+    robot.drive_system.go(0, speed)
+
+def m1_follow_pacecar(robot, speed):
+    robot= rosebot.RoseBot()
+    blob= robot.sensor_system.camera.get_biggest_blob()
+    area=blob.get_area()
+    while True:
+        if area!=blob.get_area():
+            robot.drive_system.go(speed,speed)
+            if blob.is_against_left_edge():
+                robot.drive_system.go(0,speed)
+            elif blob.is_against_right_edge():
+                robot.drive_system.go(speed,0)
+        else:
+            break
+
+
+
