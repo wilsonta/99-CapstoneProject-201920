@@ -349,7 +349,7 @@ class DriveSystem(object):
         left_LED = LED('left')
         right_LED = LED('right')
         touch_sensor = TouchSensor(1)
-        self.go(70, 70)
+        self.go(30, 30)
         arm_and_claw = ArmAndClaw(touch_sensor)
 
 
@@ -361,9 +361,10 @@ class DriveSystem(object):
             time.sleep(LED_initital_rate/100)
             if self.sensor_system.ir_proximity_sensor.get_distance_in_inches() <= orig_distance:
                 LED_initital_rate = LED_initital_rate-LED_rate_cycle_increase
-                print(self.sensor_system.ir_proximity_sensor.get_distance_in_inches())
+                x = self.sensor_system.ir_proximity_sensor.get_distance_in_inches()
+                print(x)
                 orig_distance = self.sensor_system.ir_proximity_sensor.get_distance_in_inches()
-                if self.sensor_system.ir_proximity_sensor.get_distance_in_inches() <= 2:
+                if x <= 2:
                     self.stop()
                     arm_and_claw.raise_arm()
                     break

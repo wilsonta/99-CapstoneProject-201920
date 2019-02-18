@@ -273,12 +273,17 @@ def get_m3_frame(window, mqtt_sender):
     frame_label = ttk.Label(frame, text='m3 frame')
     LED_intitial_cycle_rate_label = ttk.Label(frame, text='LED initial cycle rate')
     LED_rate_of_increase_label = ttk.Label(frame, text='LED rate of cycle increase')
+    area_label = ttk.Label(frame, text='Minimum Area')
+    speed_label = ttk.Label(frame, text='speed')
     #Entry
     LED_intitial_cycle_rate_entry = ttk.Entry(frame, width=8)
     LED_rate_of_increase_entry = ttk.Entry(frame, width=8)
-
+    area_entry = ttk.Entry(frame, width=8)
+    speed_entry = ttk.Entry(frame, width=8)
     #Buttons
     LED_cycle_button = ttk.Button(frame, text='LED cycle')
+    clockwise_button = ttk.Button(frame, text='spin clockwise and find')
+    counter_clockwise_button = ttk.Button(frame, text='spin counter and find')
     #Grids
     frame_label.grid(row=0, column=1)
     LED_intitial_cycle_rate_label.grid(row=1, column=0)
@@ -286,8 +291,16 @@ def get_m3_frame(window, mqtt_sender):
     LED_intitial_cycle_rate_entry.grid(row=2, column=0)
     LED_rate_of_increase_entry.grid(row=2, column=2)
     LED_cycle_button.grid(row=2, column=3)
+    area_entry.grid(row=5, column=0)
+    area_label.grid(row=6, column=0)
+    clockwise_button.grid(row=4, column=0)
+    counter_clockwise_button.grid(row=4, column=1)
+    speed_entry.grid(row=5, column=1)
+    speed_label.grid(row=6, column=1)
     #Commands
     LED_cycle_button['command'] = lambda: handle_LED_cycle_lights(mqtt_sender, LED_intitial_cycle_rate_entry, LED_rate_of_increase_entry)
+    clockwise_button['command'] = lambda: handle_clockwisem3_button(mqtt_sender, area_entry, speed_entry, LED_intitial_cycle_rate_entry, LED_rate_of_increase_entry)
+    counter_clockwise_button['command'] = lambda: handle_counterm3_button(mqtt_sender, area_entry, speed_entry, LED_intitial_cycle_rate_entry, LED_rate_of_increase_entry)
 
 
     return frame
@@ -595,3 +608,21 @@ def handle_clockwise_button(area_entry,speed_entry,tone_freq_entry,delta_tone_en
 def handle_counter_clockwise_button(area_entry,speed_entry,tone_freq_entry,delta_tone_entry,mqtt_sender):
     print("spin counter clockwise and find")
     mqtt_sender.send_message('smart_counter_clockwise_m2',[area_entry.get(),speed_entry.get(),tone_freq_entry.get(),delta_tone_entry.get(),mqtt_sender])
+
+def handle_clockwisem3_button(mqtt_sender, area_entry, speed_entry, LED_initital_cycle_rate_entry, LED_rate_increase_entry):
+    area = int(area_entry.get())
+    speed = int(speed_entry.get())
+    LED_initital_cycle_rate = int(LED_initital_cycle_rate_entry.get())
+    LED_rate_increase = int(LED_rate_increase_entry.get())
+    print('spin clockwise at', speed, 'until sees area', area)
+    print('LED cycle initially at', LED_initital_cycle_rate, 'and increase at', LED_rate_increase)
+    mqtt_sender.send_message('smart_clockwise_m3', [area, speed, LED_initital_cycle_rate, LED_rate_increase])
+
+def handle_counterm3_button(mqtt_sender, area_entry, speed_entry, LED_initital_cycle_rate_entry, LED_rate_increase_entry):
+    area = int(area_entry.get())
+    speed = int(speed_entry.get())
+    LED_initital_cycle_rate = int(LED_initital_cycle_rate_entry.get())
+    LED_rate_increase = int(LED_rate_increase_entry.get())
+    print('spin counter at', speed, 'until sees area', area)
+    print('LED cycle initially at', LED_initital_cycle_rate, 'and increase at', LED_rate_increase)
+    mqtt_sender.send_message('smart_counter_m3', [area, speed, LED_initital_cycle_rate, LED_rate_increase])
