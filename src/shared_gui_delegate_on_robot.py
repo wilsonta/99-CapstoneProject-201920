@@ -125,3 +125,6 @@ class Respond_to_GUI_message(object):
 
     def m1_stop_off_track(self,color,speed):
         m1_extra_robot.m1_stop_off_track(self.robot, color, speed)
+
+    def m1_avoid_collision(self, speed):
+        m1_extra_robot.m1_avoid_collision(self.robot, speed)

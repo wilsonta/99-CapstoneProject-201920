@@ -24,3 +24,8 @@ def m1_pit_stop(robot, speed):
 def m1_stop_off_track(robot, color, speed):
     #robot= rosebot.RoseBot()
     robot.drive_system.go_straight_until_color_is(color, speed)
+
+def m1_avoid_collision(robot, speed):
+    inches=1.5
+    #robot= rosebot.RoseBot()
+    robot.drive_system.go_forward_until_distance_is_less_than(inches, speed)

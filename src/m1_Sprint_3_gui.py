@@ -44,6 +44,7 @@ def get_m1_sprint_3_frame(window, mqtt_sender):
 
     pit_stop_button['command']= lambda: handle_pit_stop(mqtt_sender, m1_speed_entry)
     stop_off_track_button['command']= lambda: handle_m1_stop_off_track(mqtt_sender, m1_color_entry, m1_speed_entry)
+    avoid_collision_button['command']= lambda: handle_avoid_collision(mqtt_sender, m1_speed_entry)
 
     return frame
 
@@ -57,3 +58,5 @@ def handle_m1_stop_off_track(mqtt_sender, m1_color_entry, m1_speed_entry):
 def handle_pit_stop(mqtt_sender, m1_speed_entry):
     mqtt_sender.send_message('m1_pit_stop', [m1_speed_entry.get()])
 
+def handle_avoid_collision(mqtt_sender, m1_speed_entry):
+    mqtt_sender.send_message('m1_avoid_collision', [m1_speed_entry.get()])
