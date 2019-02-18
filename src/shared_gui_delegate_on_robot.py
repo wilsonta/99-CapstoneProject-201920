@@ -110,3 +110,11 @@ class Respond_to_GUI_message(object):
     def smart_counter_m3(self, area, speed, LED_initial_rate, LED_rate_cycle_increase):
         self.robot.drive_system.spin_counterclockwise_until_sees_object(speed, area)
         self.robot.drive_system.cycle_LED_lights(LED_initial_rate, LED_rate_cycle_increase)
+
+    def smart_clockwise_m1(self, area, speed):
+        self.robot.drive_system.spin_clockwise_until_sees_object(speed, area)
+        self.robot.drive_system.beep_as_it_runs(speed)
+
+    def smart_counter_m1(self, area, speed):
+        self.robot.drive_system.spin_counterclockwise_until_sees_object(speed, area)
+        self.robot.drive_system.beep_as_it_runs(speed)

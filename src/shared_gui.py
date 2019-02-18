@@ -366,14 +366,26 @@ def get_m1_frame(window, mqtt_sender):
     m1_speed_label=ttk.Label(frame, text='Speed')
     m1_speed_entry=ttk.Entry(frame, width=8)
     m1_speed_entry.insert(0,'100')
+    m1_spin_clockwise_button=ttk.Button(frame, text='Spin Clockwise and Find')
+    m1_spin_counterclockwise_button= ttk.Button(frame, text='Spin Counterclockwise and Find')
+    m1_area_entry=ttk.Entry(frame, width=8)
+    m1_area_label= ttk.Label(frame, text='Area')
+
 
 
     frame_label.grid(row=0, column=0)
     beep_sensor_button.grid(row=3, column=0)
     m1_speed_label.grid(row=1, column=0)
     m1_speed_entry.grid(row=2,column=0)
+    m1_spin_clockwise_button.grid(row=4, column=0)
+    m1_spin_counterclockwise_button.grid(row=4, column=1)
+    m1_area_entry.grid(row=5, column=0)
+    m1_area_label.grid(row=6, column=0)
+
 
     beep_sensor_button['command']= lambda: handle_beep_as_it_runs(mqtt_sender,m1_speed_entry)
+    m1_spin_clockwise_button['command']= lambda: handle_clockwisem1_button(mqtt_sender,m1_area_entry, m1_speed_entry)
+    m1_spin_counterclockwise_button['command']= lambda: handle_counterm1_button(mqtt_sender, m1_area_entry, m1_speed_entry)
 
     return frame
 
@@ -626,3 +638,15 @@ def handle_counterm3_button(mqtt_sender, area_entry, speed_entry, LED_initital_c
     print('spin counter at', speed, 'until sees area', area)
     print('LED cycle initially at', LED_initital_cycle_rate, 'and increase at', LED_rate_increase)
     mqtt_sender.send_message('smart_counter_m3', [area, speed, LED_initital_cycle_rate, LED_rate_increase])
+
+def handle_clockwisem1_button(mqtt_sender, m1_area_entry, m1_speed_entry):
+    area = int(m1_area_entry.get())
+    speed = int(m1_speed_entry.get())
+    print('spin clockwise at', speed, 'until sees area', area)
+    mqtt_sender.send_message('smart_clockwise_m1', [area, speed])
+
+def handle_counterm1_button(mqtt_sender, m1_area_entry, m1_speed_entry):
+    area = int(m1_area_entry.get())
+    speed = int(m1_speed_entry.get())
+    print('spin counter at', speed, 'until sees area', area)
+    mqtt_sender.send_message('smart_counter_m1', [area, speed])
