@@ -68,4 +68,6 @@ def handle_avoid_collision(mqtt_sender, m1_speed_entry):
     mqtt_sender.send_message('m1_avoid_collision', [m1_speed_entry.get()])
 
 def handle_celebrate(mqtt_sender, m1_speed_entry, m1_area_entry):
-    mqtt_sender.send_message('m1_celebrate', [m1_speed_entry.get(), m1_area_entry.get()])
+    m1_speed_entry=int(m1_speed_entry.get())
+    m1_area_entry=int(m1_area_entry.get())
+    mqtt_sender.send_message('m1_celebrate', [m1_speed_entry, m1_area_entry])
