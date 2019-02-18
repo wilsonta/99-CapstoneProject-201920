@@ -11,6 +11,7 @@ import mqtt_remote_method_calls as com
 import tkinter
 from tkinter import ttk
 import shared_gui
+import m1_Sprint_3_gui
 
 
 def main():
@@ -28,37 +29,45 @@ def main():
     # -------------------------------------------------------------------------
     # The root TK object for the GUI:
     # -------------------------------------------------------------------------
-    root = tkinter.Tk()
-    root.title('CSSE 120 Capstone Project')
+    #root = tkinter.Tk()
+    ##root.title('CSSE 120 Capstone Project')
+    root2= tkinter.Tk()
+    root2.title('CSSE 120 Capstone Project: Racecar Project')
 
 
     # -------------------------------------------------------------------------
     # The main frame, upon which the other frames are placed.
     # -------------------------------------------------------------------------
-    main_frame = ttk.Frame(root, padding=10, borderwidth=5, relief='groove')
-    main_frame.grid()
+    #main_frame = ttk.Frame(root, padding=10, borderwidth=5, relief='groove')
+    #main_frame.grid()
+    main_frame2=ttk.Frame(root2, padding=10, borderwidth=5, relief='groove')
+    main_frame2.grid()
 
 
     # -------------------------------------------------------------------------
     # Sub-frames for the shared GUI that the team developed:
     # -------------------------------------------------------------------------
-    teleop_frame, arm_frame, control_frame, sound_frame, m1_frame = get_shared_frames(main_frame, mqtt_sender)
+    #teleop_frame, arm_frame, control_frame, sound_frame, m1_frame = get_shared_frames(main_frame, mqtt_sender)
 
     # -------------------------------------------------------------------------
     # Frames that are particular to my individual contributions to the project.
     # -------------------------------------------------------------------------
     # TODO: Implement and call get_my_frames(...)
 
+    m1_sprint_3_frame =get_my_frames(main_frame2, mqtt_sender)
+
 
     # -------------------------------------------------------------------------
     # Grid the frames.
     # -------------------------------------------------------------------------
-    grid_frames(teleop_frame, arm_frame, control_frame, sound_frame,m1_frame)
+    #grid_frames(teleop_frame, arm_frame, control_frame, sound_frame,m1_frame)
+    grid_my_frames(m1_sprint_3_frame)
 
     # -------------------------------------------------------------------------
     # The event loop:
     # -------------------------------------------------------------------------
-    root.mainloop()
+    #root.mainloop()
+    root2.mainloop()
 
 
 def get_shared_frames(main_frame, mqtt_sender):
@@ -78,6 +87,14 @@ def grid_frames(teleop_frame, arm_frame, control_frame, sound_frame, m1_frame):
     control_frame.grid(row=2, column=0)
     sound_frame.grid(row=3, column=0)
     m1_frame.grid(row=0,column=1)
+
+def get_my_frames(main_frame2, mqtt_sender):
+    m1_sprint_3_frame= m1_Sprint_3_gui.get_m1_sprint_3_frame(main_frame2, mqtt_sender)
+
+    return m1_sprint_3_frame
+
+def grid_my_frames(m1_sprint_3_frame):
+    m1_sprint_3_frame.grid(row=0, column=0)
 
 
 
