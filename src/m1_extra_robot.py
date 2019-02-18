@@ -3,7 +3,7 @@ import rosebot
 
 
 def m1_pit_stop(robot, speed):
-    robot= rosebot.RoseBot()
+    #robot= rosebot.RoseBot()
     robot.drive_system.go(0, speed)
     time.sleep(.8)
     robot.drive_system.go(speed, speed)
@@ -21,6 +21,6 @@ def m1_pit_stop(robot, speed):
     time.sleep(.8)
     robot.drive_system.stop()
 
-def m1_stop_off_track(robot, speed, color):
-    robot= rosebot.RoseBot()
+def m1_stop_off_track(robot, color, speed):
+    #robot= rosebot.RoseBot()
     robot.drive_system.go_straight_until_color_is(color, speed)

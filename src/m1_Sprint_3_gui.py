@@ -12,8 +12,10 @@ def get_m1_sprint_3_frame(window, mqtt_sender):
 
     m1_sprint_3_label= ttk.Label(frame, text='Racecar')
     m1_speed_entry=ttk.Entry(frame, width=8)
+    m1_speed_entry.insert(0,"100")
     m1_speed_label=ttk.Label(frame, text='Speed')
     m1_color_entry= ttk.Entry(frame, width=8)
+    m1_color_entry.insert(0,'')
     m1_color_label= ttk.Label(frame, text='Color')
     pit_stop_button=ttk.Button(frame, text='Pit Stop')
     celebrate_button= ttk.Button(frame, text='Celebrate')
@@ -41,16 +43,16 @@ def get_m1_sprint_3_frame(window, mqtt_sender):
 
 
     pit_stop_button['command']= lambda: handle_pit_stop(mqtt_sender, m1_speed_entry)
-    start_engine_button['command']= lambda: handle_go_until_color_is(mqtt_sender,m1_color_entry,m1_speed_entry)
+    stop_off_track_button['command']= lambda: handle_m1_stop_off_track(mqtt_sender, m1_color_entry, m1_speed_entry)
 
     return frame
 
 
 
-def handle_go_until_color_is(mqtt_sender, m1_color_entry, m1_speed_entry):
+def handle_m1_stop_off_track(mqtt_sender, m1_color_entry, m1_speed_entry):
     print('I am going until', m1_color_entry.get(), 'in a speed of:', m1_speed_entry.get())
 
-    mqtt_sender.send_message('go_until_color_is', [m1_color_entry.get(), m1_speed_entry.get()])
+    mqtt_sender.send_message('m1_stop_off_track', [m1_color_entry.get(), m1_speed_entry.get()])
 
 def handle_pit_stop(mqtt_sender, m1_speed_entry):
     mqtt_sender.send_message('m1_pit_stop', [m1_speed_entry.get()])
