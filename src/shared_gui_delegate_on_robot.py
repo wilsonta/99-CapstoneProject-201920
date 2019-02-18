@@ -7,6 +7,7 @@
   Winter term, 2018-2019.
 """
 import rosebot
+import m1_extra_robot
 class Respond_to_GUI_message(object):
 
     def __init__(self,robot):
@@ -118,3 +119,6 @@ class Respond_to_GUI_message(object):
     def smart_counter_m1(self, area, speed):
         self.robot.drive_system.spin_counterclockwise_until_sees_object(speed, area)
         self.robot.drive_system.beep_as_it_runs(speed)
+
+    def m1_pit_stop(self,speed):
+        m1_extra_robot.m1_pit_stop(self.robot,speed)

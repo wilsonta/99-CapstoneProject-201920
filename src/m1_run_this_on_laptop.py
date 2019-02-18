@@ -29,8 +29,8 @@ def main():
     # -------------------------------------------------------------------------
     # The root TK object for the GUI:
     # -------------------------------------------------------------------------
-    #root = tkinter.Tk()
-    ##root.title('CSSE 120 Capstone Project')
+    root = tkinter.Tk()
+    root.title('CSSE 120 Capstone Project')
     root2= tkinter.Tk()
     root2.title('CSSE 120 Capstone Project: Racecar Project')
 
@@ -38,8 +38,8 @@ def main():
     # -------------------------------------------------------------------------
     # The main frame, upon which the other frames are placed.
     # -------------------------------------------------------------------------
-    #main_frame = ttk.Frame(root, padding=10, borderwidth=5, relief='groove')
-    #main_frame.grid()
+    main_frame = ttk.Frame(root, padding=10, borderwidth=5, relief='groove')
+    main_frame.grid()
     main_frame2=ttk.Frame(root2, padding=10, borderwidth=5, relief='groove')
     main_frame2.grid()
 
@@ -47,7 +47,7 @@ def main():
     # -------------------------------------------------------------------------
     # Sub-frames for the shared GUI that the team developed:
     # -------------------------------------------------------------------------
-    #teleop_frame, arm_frame, control_frame, sound_frame, m1_frame = get_shared_frames(main_frame, mqtt_sender)
+    teleop_frame, arm_frame, control_frame, sound_frame, m1_frame = get_shared_frames(main_frame, mqtt_sender)
 
     # -------------------------------------------------------------------------
     # Frames that are particular to my individual contributions to the project.
@@ -60,13 +60,13 @@ def main():
     # -------------------------------------------------------------------------
     # Grid the frames.
     # -------------------------------------------------------------------------
-    #grid_frames(teleop_frame, arm_frame, control_frame, sound_frame,m1_frame)
+    grid_frames(teleop_frame, arm_frame, control_frame, sound_frame,m1_frame)
     grid_my_frames(m1_sprint_3_frame)
 
     # -------------------------------------------------------------------------
     # The event loop:
     # -------------------------------------------------------------------------
-    #root.mainloop()
+    root.mainloop()
     root2.mainloop()
 
 
