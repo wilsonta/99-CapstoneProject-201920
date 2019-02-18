@@ -128,3 +128,7 @@ class Respond_to_GUI_message(object):
 
     def m1_avoid_collision(self, speed):
         m1_extra_robot.m1_avoid_collision(self.robot, speed)
+
+    def m1_celebrate(self, speed, area):
+        m1_extra_robot.m1_celebrate(self.robot, speed, area)
+
