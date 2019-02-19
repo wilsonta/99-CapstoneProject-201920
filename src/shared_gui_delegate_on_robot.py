@@ -8,6 +8,7 @@
 """
 import rosebot
 import m1_extra_robot
+import m3_robot_sprint_3
 class Respond_to_GUI_message(object):
 
     def __init__(self,robot):
@@ -134,4 +135,7 @@ class Respond_to_GUI_message(object):
 
     def m1_follow_pacecar(self,speed):
         m1_extra_robot.m1_follow_pacecar(self.robot, int(speed))
+
+    def m3_chase(self, speed):
+        m3_robot_sprint_3.chase(self.robot, speed)
 
