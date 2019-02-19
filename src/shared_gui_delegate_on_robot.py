@@ -139,6 +139,9 @@ class Respond_to_GUI_message(object):
     def m1_speak_start_engines(self, phrase):
         m1_extra_robot.m1_speak_start_engines(self.robot,phrase)
 
+    def m1_pass(self, speed):
+        m1_extra_robot.m1_pass(self.robot, int(speed))
+
     def m3_chase(self, speed):
         m3_robot_sprint_3.chase(self.robot, speed)
 

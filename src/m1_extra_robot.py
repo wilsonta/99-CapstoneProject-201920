@@ -62,6 +62,27 @@ def m1_speak_start_engines(robot, phrase):
     print('statement')
     robot.sound_system.speech_maker.speak(phrase)
 
+def m1_pass(robot,speed):
+    robot.drive_system.go(speed, 0)
+    time.sleep(.8)
+    robot.drive_system.go(speed, speed)
+    time.sleep(1)
+    robot.drive_system.go(0, speed)
+    time.sleep(.8)
+    print('a')
+    robot.drive_system.go(2*speed, 2*speed)
+    print('b')
+    time.sleep(4)
+    robot.drive_system.go(0, speed)
+    print('c')
+    time.sleep(.8)
+    robot.drive_system.go(speed, speed)
+    print('d')
+    time.sleep(1)
+    robot.drive_system.go(speed, 0)
+    print('e')
+    time.sleep(.8)
+    robot.drive_system.stop()
 
 
 
