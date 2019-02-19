@@ -39,16 +39,10 @@ def m1_celebrate(robot, speed, area):
     robot.drive_system.stop()
 
 def m1_follow_pacecar(robot, speed):
-    #robot= rosebot.RoseBot()
     print('start')
-    #area=blob.get_area()
     print('starting')
     time.sleep(3)
     while True:
-        # m1_avoid_collision(robot, speed)
-        # print('moving')
-        # if robot.drive_system.stop():
-        #     break
         blob=robot.sensor_system.camera.get_biggest_blob()
         print(blob)
         if blob.get_area()>100:
@@ -62,12 +56,12 @@ def m1_follow_pacecar(robot, speed):
             else:
                 print('forward')
                 robot.drive_system.go(speed,speed)
-        # elif area<=blob.get_area()+30:
-        #     robot.drive_system.stop()
-        #     break
-        # elif area>=blob.get_area()-30:
-        #     robot.drive_system.stop()
-        #     break
+
+def m1_speak_start_engines(robot, phrase):
+    #robot=rosebot.RoseBot()
+    print('statement')
+    robot.sound_system.speech_maker.speak(phrase)
+
 
 
 

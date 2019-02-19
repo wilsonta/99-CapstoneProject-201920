@@ -28,6 +28,9 @@ def get_m1_sprint_3_frame(window, mqtt_sender):
     m1_area_entry= ttk.Entry(frame, width=8)
     m1_area_entry.insert(0,'1000')
     m1_area_label=ttk.Label(frame, text='Area')
+    m1_speech_entry=ttk.Entry(frame, width=8)
+    m1_speech_entry.insert(0, 'Start your Engines')
+    m1_speech_label=ttk.Label(frame, text='Speak')
 
 
     m1_sprint_3_label.grid(row=0, column=1)
@@ -37,6 +40,8 @@ def get_m1_sprint_3_frame(window, mqtt_sender):
     m1_color_label.grid(row=2,column=1)
     m1_area_entry.grid(row=1,column=2)
     m1_area_label.grid(row=2, column=2)
+    m1_speech_entry.grid(row=1, column=3)
+    m1_speech_label.grid(row=2, column=3)
     pit_stop_button.grid(row=3, column=0)
     celebrate_button.grid(row=3, column=1)
     follow_track_button.grid(row=3, column=2)
@@ -52,6 +57,7 @@ def get_m1_sprint_3_frame(window, mqtt_sender):
     avoid_collision_button['command']= lambda: handle_avoid_collision(mqtt_sender, m1_speed_entry)
     celebrate_button['command']= lambda: handle_celebrate(mqtt_sender, m1_speed_entry, m1_area_entry)
     follow_pacecar_button['command']= lambda: handle_follow_pacecar(mqtt_sender, m1_speed_entry)
+    start_engine_button['command']= lambda: handle_m1_speak_start_engines(mqtt_sender, m1_speech_entry)
 
     return frame
 
@@ -74,6 +80,8 @@ def handle_celebrate(mqtt_sender, m1_speed_entry, m1_area_entry):
     mqtt_sender.send_message('m1_celebrate', [m1_speed_entry, m1_area_entry])
 
 def handle_follow_pacecar(mqtt_sender, m1_speed_entry):
-    print('handle follow pacecar')
     m1_speed_entry=int(m1_speed_entry.get())
     mqtt_sender.send_message('m1_follow_pacecar', [m1_speed_entry])
+
+def handle_m1_speak_start_engines(mqtt_sender, m1_speech_entry):
+    mqtt_sender.send_message('m1_speak_start_engines', [m1_speech_entry.get()])
