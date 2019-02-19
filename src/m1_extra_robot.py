@@ -84,5 +84,28 @@ def m1_pass(robot,speed):
     time.sleep(.8)
     robot.drive_system.stop()
 
+def m1_brake_lights(robot, speed):
+    robot.drive_system.go(speed, speed)
+    time.sleep(3)
+    left_led=robot.led_system.left_led
+    right_led=robot.led_system.right_led
+    left_led.set_color_by_name(left_led.RED)
+    right_led.set_color_by_name(right_led.RED)
+    while True:
+        if speed>0:
+            speed=speed/2
+        else:
+            break
+    robot.drive_system.stop()
+
+def m1_green_lights_go(robot, speed):
+    robot.drive_system.go(speed, speed)
+    left_led = robot.led_system.left_led
+    right_led = robot.led_system.right_led
+    left_led.set_color_by_name(left_led.GREEN)
+    right_led.set_color_by_name(right_led.GREEN)
+    time.sleep(4)
+    robot.drive_system.stop()
+
 
 
