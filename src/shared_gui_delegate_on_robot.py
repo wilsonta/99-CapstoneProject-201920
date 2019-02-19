@@ -133,5 +133,5 @@ class Respond_to_GUI_message(object):
         m1_extra_robot.m1_celebrate(self.robot, speed, area)
 
     def m1_follow_pacecar(self,speed):
-        m1_extra_robot.m1_follow_pacecar(self.robot, speed)
+        m1_extra_robot.m1_follow_pacecar(self.robot, int(speed))
 
