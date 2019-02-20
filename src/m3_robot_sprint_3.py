@@ -9,9 +9,9 @@ def chase(robot, speed):
     while True:
         blob = robot.sensor_system.camera.get_biggest_blob()
         distance = float(robot.sensor_system.ir_proximity_sensor.get_distance_in_inches())
-        if distance < 1:
+        if distance < 0.5:
             distance = float(robot.sensor_system.ir_proximity_sensor.get_distance_in_inches())
-            if distance < 1:
+            if distance < 0.5:
                 robot.arm_and_claw.raise_arm()
                 break
         if blob.get_area() > 100:
@@ -49,21 +49,16 @@ def follow(length, speed):
     while True:
         blob = robot.sensor_system.camera.get_biggest_blob()
         distance = float(robot.sensor_system.ir_proximity_sensor.get_distance_in_inches())
-        print(distance)
         while distance < 5:
-            distance = float(robot.sensor_system.ir_proximity_sensor.get_distance_in_inches())
-            print(distance)
-            robot.drive_system.stop()
+            while distance < 5:
+                distance = float(robot.sensor_system.ir_proximity_sensor.get_distance_in_inches())
+                robot.drive_system.stop()
         if blob.get_area() > 100:
             if blob.center.x > 185:
-                print('right')
                 robot.drive_system.go(speed, -speed)
-
             elif blob.center.x < 135:
-                print('left')
                 robot.drive_system.go(-speed, speed)
             else:
-                print('forward')
                 robot.drive_system.go(speed, speed)
         robot.drive_system.go(speed, speed)
         if time.time() - start >= length:
