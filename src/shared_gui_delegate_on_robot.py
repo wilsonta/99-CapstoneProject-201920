@@ -151,3 +151,8 @@ class Respond_to_GUI_message(object):
     def m3_chase(self, speed):
         m3_robot_sprint_3.chase(self.robot, speed)
 
+    def m3_lights(self, length):
+        m3_robot_sprint_3.turn_on_lights(length)
+
+    def m3_siren(self, length):
+        m3_robot_sprint_3.siren(length)
