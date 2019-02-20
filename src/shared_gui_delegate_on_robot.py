@@ -156,3 +156,6 @@ class Respond_to_GUI_message(object):
 
     def m3_siren(self, length):
         m3_robot_sprint_3.siren(length)
+
+    def m3_follow(self, length, speed):
+        m3_robot_sprint_3.follow(length, speed)
