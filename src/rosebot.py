@@ -69,7 +69,7 @@ class DriveSystem(object):
         """
         self.sensor_system = sensor_system
         self.left_motor = Motor('B')
-        self.right_motor = Motor('C')
+        self.right_motor = Motor('D')
 
         self.wheel_circumference = 1.3 * math.pi
 
@@ -230,7 +230,7 @@ class DriveSystem(object):
         if orig_distance + int(delta) < int(inches) & orig_distance - int(delta) < int(inches):
             self.go(speed, speed)
 
-        if orig_distance + int(delta) > int(inches) & orig_distance - int(delta) < int(inches):
+        if orig_distance + int(delta) > int(inches) & orig_distance - int(delta) > int(inches):
             self.go(-int(speed), -int(speed))
 
         while True:

@@ -11,7 +11,7 @@ import mqtt_remote_method_calls as com
 import tkinter
 from tkinter import ttk
 import shared_gui
-
+import m2_sprint_3_GUI
 
 def main():
     """
@@ -30,6 +30,8 @@ def main():
     # -------------------------------------------------------------------------
     root = tkinter.Tk()
     root.title('CSSE 120 Capstone Project, Matthew White')
+    root2 = tkinter.Tk()
+    root2.title('CSSE 120 Capstone Project: Maid Robot')
 
 
     # -------------------------------------------------------------------------
@@ -37,6 +39,8 @@ def main():
     # -------------------------------------------------------------------------
     main_frame = ttk.Frame(root, padding=10, borderwidth=5, relief='groove')
     main_frame.grid()
+    main_frame2 = ttk.Frame(root2, padding=10, borderwidth=5, relief='groove')
+    main_frame2.grid()
 
     # -------------------------------------------------------------------------
     # Sub-frames for the shared GUI that the team developed:
@@ -48,15 +52,22 @@ def main():
     # -------------------------------------------------------------------------
     # TODO: Implement and call get_my_frames(...)
 
+    m2_sprint_3_frame = get_my_frames(main_frame2, mqtt_sender)
+    grid_my_frames(m2_sprint_3_frame)
+
     # -------------------------------------------------------------------------
     # Grid the frames.
     # -------------------------------------------------------------------------
     grid_frames(teleop_frame, arm_frame, control_frame, sound_frame, m2_frame)
 
+
+
     # -------------------------------------------------------------------------
     # The event loop:
     # -------------------------------------------------------------------------
     root.mainloop()
+
+
 
 
 def get_shared_frames(main_frame, mqtt_sender):
@@ -77,6 +88,14 @@ def grid_frames(teleop_frame, arm_frame, control_frame, sound_frame, m2_frame):
     sound_frame.grid(row=3, column=0)
     m2_frame.grid(row = 0,column =1)
 
+
+def get_my_frames(main_frame2, mqtt_sender):
+    m2_sprint_3_frame= m2_sprint_3_GUI.get_m3_sprint_3_frame(main_frame2, mqtt_sender)
+
+    return m2_sprint_3_frame
+
+def grid_my_frames(m3_sprint_3_frame):
+    m3_sprint_3_frame.grid(row=0, column=0)
 
 
 

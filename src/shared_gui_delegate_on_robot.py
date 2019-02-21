@@ -9,6 +9,7 @@
 import rosebot
 import m1_extra_robot
 import m3_robot_sprint_3
+import m2_robot_sprint_3
 class Respond_to_GUI_message(object):
 
     def __init__(self,robot):
@@ -150,4 +151,17 @@ class Respond_to_GUI_message(object):
 
     def m3_chase(self, speed):
         m3_robot_sprint_3.chase(self.robot, speed)
+
+    def draw_square_m2(self, speed,side_length):
+        print('delegate')
+        m2_robot_sprint_3.draw_square(self.robot,speed,side_length)
+
+    def draw_triangle_m2(self,speed,side_length):
+        m2_robot_sprint_3.draw_triangle(self.robot,speed,side_length)
+
+    def draw_pentagon_m2(self,speed,side_length):
+        m2_robot_sprint_3.draw_pentagon(self.robot,speed,side_length)
+
+    def draw_custom_shape_m2(self,speed,side_length,number_of_sides):
+        m2_robot_sprint_3.draw_any_shape(self.robot,speed,side_length,number_of_sides)
 
