@@ -39,7 +39,9 @@ def draw_any_shape(robot,speed,side_lenth,number_of_sides):
         robot.drive_system.go_straight_for_inches_using_encoder(side_lenth,speed)
         turn_using_encoder(robot,speed,turn_distance)
 
-
+def unknown_operation(object, num_of_sides):
+    for k in range(len(object)):
+        x = handle(for button)['command'] lambda:
 
 
 
