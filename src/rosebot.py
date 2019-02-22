@@ -272,7 +272,7 @@ class DriveSystem(object):
         #if any).
 
     def display_camera_data(self):
-        print(self.sensor_system.camera.get_biggest_blob())
+            print(self.sensor_system.camera.get_biggest_blob())
 
     def spin_clockwise_until_sees_object(self, speed, area):
         """
